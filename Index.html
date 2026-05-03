@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kleiin MW – Electricidad & Muebles | Corrientes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --amarillo: #F5C518;
+      --negro: #0D0D0D;
+      --gris-oscuro: #1A1A1A;
+      --gris-medio: #2C2C2C;
+      --gris-claro: #888;
+      --blanco: #F5F5F0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--negro);
+      color: var(--blanco);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #222;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 2px;
+      color: var(--amarillo);
+    }
+
+    .nav-cta {
+      background: var(--amarillo);
+      color: var(--negro);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 10px 20px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── HERO ── */
+    #inicio {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px 28px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 80% 50%, rgba(245,197,24,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(245,197,24,0.05) 0%, transparent 60%);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      border: 1px solid var(--amarillo);
+      color: var(--amarillo);
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      animation: fadeUp .6s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 14vw, 8rem);
+      line-height: .92;
+      letter-spacing: 1px;
+      animation: fadeUp .7s .1s ease both;
+    }
+
+    .hero-title span { color: var(--amarillo); }
+
+    .hero-sub {
+      margin-top: 24px;
+      font-size: 1.05rem;
+      color: var(--gris-claro);
+      max-width: 400px;
+      line-height: 1.6;
+      font-weight: 300;
+      animation: fadeUp .7s .2s ease both;
+    }
+
+    .hero-btns {
+      margin-top: 40px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp .7s .3s ease both;
+    }
+
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--amarillo);
+      color: var(--negro);
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform .2s, opacity .2s;
+    }
+    .btn-primary:hover { transform: scale(1.04); opacity: .9; }
+
+    .btn-secondary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1.5px solid #333;
+      color: var(--blanco);
+      font-size: 1rem;
+      padding: 16px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: border-color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--amarillo); }
+
+    .whatsapp-icon { font-size: 1.3rem; }
+
+    /* ── SERVICIOS ── */
+    #servicios {
+      padding: 90px 28px;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amarillo);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 8vw, 4rem);
+      line-height: 1;
+      margin-bottom: 48px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .cards { grid-template-columns: 1fr 1fr; }
+    }
+
+    .card {
+      background: var(--gris-oscuro);
+      border: 1px solid #252525;
+      border-radius: 20px;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s, transform .3s;
+    }
+    .card:hover { border-color: var(--amarillo); transform: translateY(-4px); }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--amarillo);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s ease;
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-icon {
+      font-size: 2.4rem;
+      margin-bottom: 18px;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .card-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .card-list li {
+      font-size: 0.92rem;
+      color: var(--gris-claro);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.4;
+    }
+
+    .card-list li::before {
+      content: '▸';
+      color: var(--amarillo);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── POR QUÉ ELEGIRME ── */
+    #por-que {
+      padding: 80px 28px;
+      background: var(--gris-oscuro);
+      border-top: 1px solid #222;
+      border-bottom: 1px solid #222;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 20px;
+      margin-top: 48px;
+    }
+
+    .feature-icon { font-size: 2rem; margin-bottom: 10px; }
+    .feature-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+    .feature-text { font-size: 0.85rem; color: var(--gris-claro); line-height: 1.5; }
+
+    /* ── CONTACTO ── */
+    #contacto {
+      padding: 90px 28px;
+      text-align: center;
+    }
+
+    .contact-box {
+      background: var(--gris-oscuro);
+      border: 1px solid #252525;
+      border-radius: 24px;
+      padding: 50px 28px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .contact-box .section-title { margin-bottom: 12px; }
+
+    .contact-desc {
+      color: var(--gris-claro);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #25D366;
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 18px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform .2s, opacity .2s;
+      margin-bottom: 20px;
+    }
+    .btn-whatsapp:hover { transform: scale(1.04); opacity: .9; }
+
+    .contact-info {
+      font-size: 0.85rem;
+      color: var(--gris-claro);
+    }
+    .contact-info span { color: var(--blanco); font-weight: 500; }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 28px;
+      border-top: 1px solid #1e1e1e;
+      font-size: 0.8rem;
+      color: #444;
+    }
+    footer span { color: var(--amarillo); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── FLOATING WA BUTTON ── */
+    .float-wa {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99;
+      background: #25D366;
+      color: #fff;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform .2s;
+    }
+    .float-wa:hover { transform: scale(1.1); }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Kleiin MW</div>
+    <a class="nav-cta" href="https://wa.me/543644790241?text=Hola%20Kleiin%20MW%2C%20quiero%20consultar%20por%20sus%20servicios%20%F0%9F%94%8C" target="_blank">Contactar</a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-tag">📍 Corrientes Capital</div>
+    <h1 class="hero-title">
+      Electricidad<br>& <span>Muebles</span>
+    </h1>
+    <p class="hero-sub">Instalaciones eléctricas y armado de muebles con precisión, seguridad y rapidez. Trabajamos en tu hogar o negocio.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" href="https://wa.me/543644790241?text=Hola%20Kleiin%20MW%2C%20quiero%20solicitar%20un%20servicio%20%F0%9F%94%8C" target="_blank">
+        <span class="whatsapp-icon">💬</span> Pedir presupuesto
+      </a>
+      <a class="btn-secondary" href="#servicios">Ver servicios ↓</a>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios">
+    <p class="section-label">Lo que hago</p>
+    <h2 class="section-title">Mis Servicios</h2>
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Electricidad</div>
+        <ul class="card-list">
+          <li>Instalaciones eléctricas nuevas</li>
+          <li>Reparación de tableros e interruptores</li>
+          <li>Colocación de tomacorrientes y llaves</li>
+          <li>Instalación de luminarias y artefactos</li>
+          <li>Revisión de instalaciones existentes</li>
+          <li>Extensiones y puntos de luz</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🪛</div>
+        <div class="card-title">Armado de Muebles</div>
+        <ul class="card-list">
+          <li>Armado de muebles de IKEA y otras marcas</li>
+          <li>Camas, placares y estanterías</li>
+          <li>Escritorios y mesas de trabajo</li>
+          <li>Muebles de cocina y baño</li>
+          <li>Muebles de living y comedor</li>
+          <li>Revisión y rearmado de muebles</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- POR QUÉ -->
+  <section id="por-que">
+    <p class="section-label">Por qué elegirme</p>
+    <h2 class="section-title">Trabajo con seriedad</h2>
+    <div class="features">
+      <div>
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-title">Trabajo seguro</div>
+        <div class="feature-text">Instalaciones eléctricas con materiales de calidad y normas de seguridad.</div>
+      </div>
+      <div>
+        <div class="feature-icon">⏱️</div>
+        <div class="feature-title">Puntualidad</div>
+        <div class="feature-text">Llego en el horario acordado y termino el trabajo en el día.</div>
+      </div>
+      <div>
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Precio justo</div>
+        <div class="feature-text">Presupuesto sin cargo y precios claros, sin sorpresas al finalizar.</div>
+      </div>
+      <div>
+        <div class="feature-icon">📍</div>
+        <div class="feature-title">Zona Corrientes</div>
+        <div class="feature-text">Trabajo en Corrientes Capital y alrededores.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="contact-box">
+      <p class="section-label">Contacto</p>
+      <h2 class="section-title">¿Necesitás<br>un servicio?</h2>
+      <p class="contact-desc">Escribime por WhatsApp y te respondo rápido. Contame qué necesitás y te doy un presupuesto sin compromiso.</p>
+      <a class="btn-whatsapp" href="https://wa.me/543644790241?text=Hola%20Kleiin%20MW%2C%20quiero%20consultar%20por%20sus%20servicios%20%F0%9F%94%8C" target="_blank">
+        💬 Escribir por WhatsApp
+      </a>
+      <div class="contact-info">
+        📞 <span>+54 364 479 0241</span><br>
+        📍 <span>Corrientes Capital</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 <span>Kleiin MW</span> · Corrientes · Todos los derechos reservados
+  </footer>
+
+  <!-- BOTÓN FLOTANTE -->
+  <a class="float-wa" href="https://wa.me/543644790241?text=Hola%20Kleiin%20MW%2C%20quiero%20consultar%20por%20sus%20servicios%20%F0%9F%94%8C" target="_blank" title="WhatsApp">💬</a>
+
+</body>
+  </html>
