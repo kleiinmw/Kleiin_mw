@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KLEIIN MW | Entretenimiento Digital Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+        .glass {
+            background: rgba(11, 11, 11, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glow-blue:hover {
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.6);
+            transform: translateY(-2px);
+        }
+        .card-border {
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            transition: border 0.3s ease;
+        }
+        .card-border:hover {
+            border: 1px solid rgba(0, 242, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="fixed w-full z-50 glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0">
+                    <span class="text-2xl font-extrabold tracking-tighter text-[#00f2ff]">KLEIIN MW</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://wa.me/543794082942" class="text-sm font-medium text-gray-400 hover:text-[#00f2ff] transition-colors">
+                        Soporte
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 class="text-5xl lg:text-7xl font-extrabold leading-tight mb-6">
+                        Todo el entretenimiento <br>
+                        <span class="text-[#00f2ff]">en un solo lugar.</span>
+                    </h1>
+                    <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto lg:mx-0">
+                        Accedé al mejor contenido premium, deportes en vivo y series en alta definición desde cualquier dispositivo.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="https://wa.me/543794082942" class="flex items-center justify-center gap-2 bg-[#00f2ff] text-black px-8 py-4 rounded-full font-bold text-lg glow-blue">
+                            <i data-lucide="message-circle"></i>
+                            Contactar por WhatsApp ahora
+                        </a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute -inset-4 bg-[#00f2ff]/20 blur-3xl rounded-full"></div>
+                    <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575?auto=format&fit=crop&q=80&w=800" alt="Entretenimiento" class="relative rounded-2xl border border-white/10 shadow-2xl">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0b0b0b]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-4">Contenido ilimitado</h2>
+                <div class="h-1 w-20 bg-[#00f2ff] mx-auto"></div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-black p-8 rounded-2xl card-border">
+                    <div class="w-12 h-12 bg-[#00f2ff]/10 rounded-lg flex items-center justify-center mb-6 text-[#00f2ff]">
+                        <i data-lucide="trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Deportes en vivo</h3>
+                    <p class="text-gray-400 text-sm">Fútbol nacional e internacional, automovilismo, tenis y todas las disciplinas que te apasionan.</p>
+                </div>
+                <div class="bg-black p-8 rounded-2xl card-border">
+                    <div class="w-12 h-12 bg-[#00f2ff]/10 rounded-lg flex items-center justify-center mb-6 text-[#00f2ff]">
+                        <i data-lucide="film"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Películas y Series</h3>
+                    <p class="text-gray-400 text-sm">Los últimos estrenos de la pantalla grande y las maratones más buscadas en alta calidad.</p>
+                </div>
+                <div class="bg-black p-8 rounded-2xl card-border">
+                    <div class="w-12 h-12 bg-[#00f2ff]/10 rounded-lg flex items-center justify-center mb-6 text-[#00f2ff]">
+                        <i data-lucide="tv-2"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Contenido Familiar</h3>
+                    <p class="text-gray-400 text-sm">Diversión para los más chicos con dibujos animados y documentales educativos para todas las edades.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <h4 class="text-[#00f2ff] font-bold text-lg mb-1">Instalación</h4>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest">Inmediata</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-[#00f2ff] font-bold text-lg mb-1">Sin contratos</h4>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest">Libertad total</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-[#00f2ff] font-bold text-lg mb-1">Configuración</h4>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest">Personalizada</p>
+                </div>
+                <div class="text-center">
+                    <h4 class="text-[#00f2ff] font-bold text-lg mb-1">Soporte</h4>
+                    <p class="text-gray-500 text-xs uppercase tracking-widest">24/7 online</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-gradient-to-b from-black to-[#0b0b0b]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-16">¿Cómo funciona?</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-12">
+                <div class="flex flex-col items-center max-w-[200px]">
+                    <div class="w-16 h-16 rounded-full border-2 border-[#00f2ff] flex items-center justify-center text-xl font-bold mb-4">1</div>
+                    <p class="font-semibold text-white">Contactanos</p>
+                </div>
+                <div class="hidden md:block w-24 h-px bg-[#00f2ff]/30"></div>
+                <div class="flex flex-col items-center max-w-[200px]">
+                    <div class="w-16 h-16 rounded-full border-2 border-[#00f2ff] flex items-center justify-center text-xl font-bold mb-4">2</div>
+                    <p class="font-semibold text-white">Instalamos el servicio</p>
+                </div>
+                <div class="hidden md:block w-24 h-px bg-[#00f2ff]/30"></div>
+                <div class="flex flex-col items-center max-w-[200px]">
+                    <div class="w-16 h-16 rounded-full border-2 border-[#00f2ff] flex items-center justify-center text-xl font-bold mb-4">3</div>
+                    <p class="font-semibold text-white">Disfrutás del contenido</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-[#0b0b0b]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-black p-10 rounded-3xl border border-white/5 relative overflow-hidden">
+                <div class="absolute right-0 top-0 opacity-20 pointer-events-none">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=400" alt="Soporte" class="h-64 object-cover">
+                </div>
+                <h3 class="text-2xl font-bold mb-8">Requisitos del Servicio</h3>
+                <ul class="space-y-6 relative z-10">
+                    <li class="flex items-center gap-4">
+                        <i data-lucide="wifi" class="text-[#00f2ff]"></i>
+                        <span class="text-gray-300 font-medium">Conexión a Internet estable</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <i data-lucide="monitor" class="text-[#00f2ff]"></i>
+                        <span class="text-gray-300 font-medium">Cualquier dispositivo compatible (Smart TV, Celular, PC)</span>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <i data-lucide="map-pin" class="text-[#00f2ff]"></i>
+                        <span class="text-gray-300 font-medium text-[#00f2ff]">Disponible para Corrientes Capital</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 text-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl lg:text-6xl font-black mb-8">¡Empezá a disfrutar hoy mismo!</h2>
+            <p class="text-gray-400 mb-12 text-lg">Unite a la comunidad de KLEIIN MW y transformá tu manera de ver televisión.</p>
+            <a href="https://wa.me/543794082942" class="inline-flex items-center gap-3 bg-[#00f2ff] text-black px-12 py-5 rounded-full font-black text-xl glow-blue uppercase tracking-tight">
+                <i data-lucide="zap" fill="currentColor"></i>
+                Activar por WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-white/10 text-center">
+        <p class="text-gray-600 text-sm">© 2026 KLEIIN MW - Corrientes Capital. Entretenimiento Premium sin límites.</p>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
