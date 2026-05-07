@@ -1,52 +1,103 @@
 <!DOCTYPE html>
+<!-- Declaración del tipo de documento HTML5 -->
 <html lang="es">
+<!-- lang="es" le dice al navegador que el contenido está en español -->
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Kleiin MW · Entretenimiento Premium</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com"></script>
+<!-- El head contiene configuración e información de la página, no se ve en pantalla -->
+
+  <meta charset="UTF-8"/>
+  <!-- UTF-8 permite usar tildes, ñ y caracteres especiales sin problemas -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Esto hace que el diseño se adapte al tamaño de pantalla del dispositivo (mobile-first) -->
+
+  <title>Kleiin MW · Entretenimiento Premium</title>
+  <!-- Texto que aparece en la pestaña del navegador -->
+
+  <!-- ── Fuentes de Google ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <!-- Carga dos tipografías:
+       - Bebas Neue: para títulos grandes (display)
+       - Outfit: para párrafos y textos del cuerpo (body) -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS desde CDN: framework de utilidades CSS.
+       Permite usar clases como "flex", "gap-4", "text-white" directamente en el HTML -->
+
 <style>
+/* ══════════════════════════════════
+   VARIABLES GLOBALES
+   Se definen una vez y se reusan en todo el CSS con var(--nombre)
+══════════════════════════════════ */
 :root {
-  --c: #00f2ff;
-  --c2: #0af;
-  --bg: #060608;
-  --bg2: #0a0a0e;
-  --gold: #f0c060;
-  --txt: #c8d8e8;
-  --glass: rgba(0,242,255,0.04);
-  --border: rgba(0,242,255,0.12);
+  --c: #00f2ff;         /* Color acento principal: azul neón */
+  --c2: #0af;           /* Variante del azul neón */
+  --bg: #060608;        /* Fondo principal: negro profundo */
+  --bg2: #0a0a0e;       /* Fondo secundario: negro azulado */
+  --gold: #f0c060;      /* Dorado para detalles especiales */
+  --txt: #c8d8e8;       /* Color base del texto: gris azulado claro */
+  --glass: rgba(0,242,255,0.04);   /* Fondo vidrio muy sutil */
+  --border: rgba(0,242,255,0.12);  /* Borde neón semitransparente */
 }
+
+/* ── Reset básico ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* Elimina márgenes y paddings por defecto del navegador en todos los elementos */
+
 html{scroll-behavior:smooth}
+/* El scroll entre secciones será suave en lugar de instantáneo */
+
 body{
-  background:var(--bg);
-  color:var(--txt);
+  background:var(--bg);        /* Fondo negro */
+  color:var(--txt);            /* Color de texto base */
   font-family:'Outfit',sans-serif;
   font-weight:400;
-  overflow-x:hidden;
-  cursor:none;
+  overflow-x:hidden;           /* Evita scroll horizontal no deseado */
+  cursor:none;                 /* Oculta el cursor nativo para mostrar el cursor personalizado */
 }
+
 ::selection{background:rgba(0,242,255,0.25);color:#fff}
+/* Color del texto cuando el usuario lo selecciona con el mouse */
+
+/* ══════════════════════════════════
+   CURSOR PERSONALIZADO
+   Dos elementos: punto central + anillo exterior con inercia
+══════════════════════════════════ */
 #cursor{
-  position:fixed;width:10px;height:10px;
-  background:var(--c);border-radius:50%;
-  pointer-events:none;z-index:9999;
-  transform:translate(-50%,-50%);
+  position:fixed;              /* Se queda fijo en pantalla siempre */
+  width:10px;height:10px;
+  background:var(--c);
+  border-radius:50%;           /* Lo hace circular */
+  pointer-events:none;         /* No interfiere con clics */
+  z-index:9999;                /* Por encima de todo */
+  transform:translate(-50%,-50%); /* Centra el punto en la posición exacta del mouse */
   transition:width .2s,height .2s,opacity .2s;
-  box-shadow:0 0 12px var(--c),0 0 24px rgba(0,242,255,0.4);
+  box-shadow:0 0 12px var(--c),0 0 24px rgba(0,242,255,0.4); /* Efecto glow */
 }
 #cursor-ring{
-  position:fixed;width:36px;height:36px;
-  border:1px solid rgba(0,242,255,0.5);border-radius:50%;
-  pointer-events:none;z-index:9998;
+  position:fixed;
+  width:36px;height:36px;
+  border:1px solid rgba(0,242,255,0.5);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9998;
   transform:translate(-50%,-50%);
-  transition:all .12s ease;
+  transition:all .12s ease; /* Sigue al mouse con un leve retraso (inercia) */
 }
+
+/* Cuando el mouse está sobre un enlace, el cursor cambia a dorado y crece */
 body:has(a:hover) #cursor{width:18px;height:18px;background:var(--gold)}
 body:has(a:hover) #cursor-ring{width:52px;height:52px;border-color:rgba(240,192,96,0.5)}
+
+/* ══════════════════════════════════
+   OVERLAYS DE TEXTURA
+   Se aplican sobre toda la página con position:fixed
+══════════════════════════════════ */
+
+/* Líneas horizontales muy sutiles tipo pantalla de TV (scanlines) */
 body::before{
   content:'';position:fixed;inset:0;
   background:repeating-linear-gradient(
@@ -55,41 +106,52 @@ body::before{
   );
   pointer-events:none;z-index:9000;
 }
+
+/* Textura de ruido/grano fotográfico generada con SVG inline */
 body::after{
   content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-  opacity:0.025;pointer-events:none;z-index:9001;
+  background-image:url("data:image/svg+xml,...");
+  opacity:0.025; /* Muy sutil, solo da profundidad */
+  pointer-events:none;z-index:9001;
 }
+
+/* Canvas de partículas animadas — se dibuja con JavaScript */
 #particles{position:fixed;inset:0;pointer-events:none;z-index:1}
-.font-display{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em}
+
+/* ══════════════════════════════════
+   NAVBAR — Barra de navegación fija
+══════════════════════════════════ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:500;
   padding:16px 24px;
   display:flex;align-items:center;justify-content:space-between;
+  /* flex con space-between: logo a la izquierda, botón a la derecha */
   transition:all .4s;
 }
 nav.scrolled{
+  /* Esta clase se agrega con JavaScript cuando el usuario hace scroll */
   background:rgba(6,6,8,0.85);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
+  backdrop-filter:blur(24px); /* Efecto glassmorphism: desenfoca lo que hay detrás */
   border-bottom:1px solid var(--border);
 }
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+
+/* Logo en la navbar */
 .nav-logo img{
-  width:44px;height:44px;border-radius:50%;
-  object-fit:cover;
+  width:44px;height:44px;border-radius:50%; /* Circular */
+  object-fit:cover; /* La imagen se recorta para llenar el espacio sin deformarse */
   border:1px solid rgba(0,242,255,0.3);
-  box-shadow:0 0 16px rgba(0,242,255,0.3);
+  box-shadow:0 0 16px rgba(0,242,255,0.3); /* Glow sutil alrededor del logo */
 }
+
+/* Botón "Soporte" en la navbar */
 .btn-support{
   display:inline-flex;align-items:center;gap:8px;
   border:1px solid var(--border);color:var(--c);
-  font-family:'Outfit',sans-serif;
   font-size:13px;font-weight:500;
   padding:8px 20px;border-radius:4px;
   text-decoration:none;
   background:rgba(0,242,255,0.04);
-  transition:all .25s;
+  transition:all .25s; /* Transición suave en hover */
   letter-spacing:.05em;text-transform:uppercase;
 }
 .btn-support:hover{
@@ -97,18 +159,30 @@ nav.scrolled{
   border-color:rgba(0,242,255,0.5);
   box-shadow:0 0 20px rgba(0,242,255,0.15);
 }
+
+/* ══════════════════════════════════
+   HERO — Sección principal de bienvenida
+══════════════════════════════════ */
 .hero{
-  position:relative;min-height:100vh;
+  position:relative;
+  min-height:100vh; /* Ocupa toda la altura de la pantalla */
   display:flex;align-items:center;justify-content:center;
   overflow:hidden;
 }
+
+/* Gradientes de fondo del hero — capas de color superpuestas */
 .hero-bg{
   position:absolute;inset:0;
   background:
     radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,80,120,0.35) 0%, transparent 70%),
+    /* Luz azul arriba al centro */
     radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,242,255,0.08) 0%, transparent 60%),
+    /* Brillo esquina inferior derecha */
     radial-gradient(ellipse 30% 30% at 20% 60%, rgba(0,100,160,0.12) 0%, transparent 60%);
+    /* Brillo esquina izquierda */
 }
+
+/* Líneas verticales decorativas tipo grilla */
 .hero-lines{
   position:absolute;inset:0;
   background:repeating-linear-gradient(
@@ -116,82 +190,129 @@ nav.scrolled{
     rgba(0,242,255,0.015) 120px,rgba(0,242,255,0.015) 121px
   );
 }
+
+/* Número "4K" gigante decorativo de fondo */
 .hero-ambient{
   position:absolute;
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(200px,35vw,500px);
-  color:rgba(0,242,255,0.025);
+  font-size:clamp(200px,35vw,500px); /* clamp(mín, preferido, máx) — responsive automático */
+  color:rgba(0,242,255,0.025);       /* Casi invisible, solo textura */
   right:-2%;top:50%;transform:translateY(-50%);
-  line-height:1;pointer-events:none;user-select:none;
+  pointer-events:none;user-select:none; /* No se puede seleccionar */
 }
+
+/* Contenedor del texto principal del hero */
 .hero-content{
   position:relative;z-index:10;
-  max-width:900px;padding:0 24px;text-align:left;
+  max-width:900px;padding:0 24px;
+  text-align:left;
 }
+
+/* Texto pequeño arriba del título: "Corrientes Capital · Disponible ahora" */
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:10px;
   font-size:11px;font-weight:600;letter-spacing:.25em;
   text-transform:uppercase;color:var(--c);
   margin-bottom:28px;
   opacity:0;animation:slideRight .8s .2s ease both;
+  /* Empieza invisible y aparece deslizándose desde la izquierda con .2s de delay */
 }
-.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--c);box-shadow:0 0 8px var(--c)}
+.hero-eyebrow::before{
+  content:''; /* Línea decorativa antes del texto */
+  width:32px;height:1px;background:var(--c);
+  box-shadow:0 0 8px var(--c);
+}
+
+/* Título principal H1 */
 .hero-h1{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(56px,10vw,130px);
-  line-height:.92;color:#fff;margin-bottom:32px;
-  opacity:0;animation:slideRight .8s .35s ease both;
+  font-size:clamp(56px,10vw,130px); /* Responsive: mín 56px, ideal 10% del ancho, máx 130px */
+  line-height:.92; /* Interlineado compacto para títulos grandes */
+  color:#fff;margin-bottom:32px;
+  opacity:0;animation:slideRight .8s .35s ease both; /* Delay de .35s */
 }
 .hero-h1 span{
-  color:transparent;-webkit-text-stroke:2px var(--c);
-  text-shadow:0 0 40px rgba(0,242,255,0.4);display:block;
+  /* La línea "en un solo lugar" — texto solo con borde, sin relleno */
+  color:transparent;
+  -webkit-text-stroke:2px var(--c); /* Borde del texto en neón */
+  text-shadow:0 0 40px rgba(0,242,255,0.4);
+  display:block; /* Fuerza salto de línea */
 }
+
+/* Subtítulo descriptivo del hero */
 .hero-sub{
-  font-size:clamp(16px,1.7vw,19px);font-weight:400;
-  color:rgba(220,232,245,0.88);
-  max-width:520px;line-height:1.8;margin-bottom:52px;
+  font-size:clamp(16px,1.7vw,19px);
+  font-weight:400;
+  color:rgba(220,232,245,0.88); /* Claro pero no blanco puro, más cómodo para leer */
+  max-width:520px;
+  line-height:1.8; /* Interlineado generoso para mejor legibilidad */
+  margin-bottom:52px;
   opacity:0;animation:slideRight .8s .5s ease both;
 }
+
+/* Contenedor de los botones del hero */
 .hero-actions{
   display:flex;flex-wrap:wrap;gap:16px;align-items:center;
+  /* flex-wrap permite que los botones pasen a la siguiente línea en mobile */
   opacity:0;animation:slideRight .8s .65s ease both;
 }
+
+/* Botón principal con fondo neón y efecto glow */
 .btn-primary{
   display:inline-flex;align-items:center;gap:10px;
-  background:var(--c);color:#000;
-  font-family:'Outfit',sans-serif;
+  background:var(--c);color:#000; /* Texto negro sobre fondo neón */
   font-weight:700;font-size:14px;
   padding:14px 28px;border-radius:4px;
-  text-decoration:none;letter-spacing:.06em;text-transform:uppercase;
-  position:relative;overflow:hidden;
+  text-decoration:none;
+  letter-spacing:.06em;text-transform:uppercase;
+  position:relative;overflow:hidden; /* Para el efecto de brillo ::before */
   transition:transform .2s,box-shadow .3s;
   box-shadow:0 0 20px rgba(0,242,255,0.5),0 0 60px rgba(0,242,255,0.2);
 }
 .btn-primary::before{
+  /* Capa de brillo diagonal que aparece en hover */
   content:'';position:absolute;inset:0;
   background:linear-gradient(135deg,rgba(255,255,255,0.25),transparent);
   opacity:0;transition:opacity .2s;
 }
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,242,255,0.6),0 0 80px rgba(0,242,255,0.25)}
-.btn-primary:hover::before{opacity:1}
+.btn-primary:hover{
+  transform:translateY(-3px); /* Se eleva levemente */
+  box-shadow:0 8px 30px rgba(0,242,255,0.6),0 0 80px rgba(0,242,255,0.25);
+}
+.btn-primary:hover::before{opacity:1} /* Aparece el brillo diagonal */
+
+/* Botón secundario "Ver servicios" — solo texto con flecha */
 .btn-secondary{
   display:inline-flex;align-items:center;gap:8px;
   color:rgba(215,228,240,0.85);
-  font-size:14px;font-weight:500;letter-spacing:.08em;
-  text-decoration:none;text-transform:uppercase;transition:color .2s;
+  font-size:14px;font-weight:500;
+  letter-spacing:.08em;text-transform:uppercase;
+  text-decoration:none;transition:color .2s;
 }
 .btn-secondary:hover{color:#fff}
 .btn-secondary svg{transition:transform .2s}
-.btn-secondary:hover svg{transform:translateX(4px)}
+.btn-secondary:hover svg{transform:translateX(4px)} /* La flecha se mueve a la derecha */
+
+/* Estadísticas en la parte inferior del hero: 24/7, +10K, 4K, ∞ */
 .hero-stats{
   position:absolute;bottom:40px;left:0;right:0;
   display:flex;justify-content:center;gap:64px;
-  z-index:10;opacity:0;animation:fadeUp .8s .9s ease both;
+  z-index:10;
+  opacity:0;animation:fadeUp .8s .9s ease both; /* Aparece desde abajo con más delay */
 }
-.stat-item{text-align:center}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;line-height:1}
-.stat-num span{color:var(--c)}
-.stat-label{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,216,232,0.6);margin-top:4px}
+.stat-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:36px;color:#fff;line-height:1;
+}
+.stat-num span{color:var(--c)} /* El símbolo /7, K, etc. en neón */
+.stat-label{
+  font-size:12px;letter-spacing:.15em;
+  text-transform:uppercase;
+  color:rgba(200,216,232,0.6); /* Texto de etiqueta más suave */
+  margin-top:4px;
+}
+
+/* Indicador de scroll: texto "Scroll" + línea vertical al costado derecho */
 .scroll-ind{
   position:absolute;bottom:40px;right:40px;
   display:flex;align-items:center;gap:8px;
@@ -199,107 +320,195 @@ nav.scrolled{
   color:rgba(200,216,232,0.35);z-index:10;
   opacity:0;animation:fadeUp .8s 1.1s ease both;
 }
-.scroll-ind::after{content:'';width:1px;height:40px;background:linear-gradient(to bottom,rgba(0,242,255,0.6),transparent);display:block}
+.scroll-ind::after{
+  content:'';width:1px;height:40px;
+  background:linear-gradient(to bottom,rgba(0,242,255,0.6),transparent);
+  /* Línea que se desvanece hacia abajo */
+}
+
+/* ══════════════════════════════════
+   ESTILOS COMPARTIDOS ENTRE SECCIONES
+══════════════════════════════════ */
 section{position:relative;z-index:10}
+/* z-index:10 asegura que las secciones queden por encima del canvas de partículas */
+
 .section-inner{max-width:1200px;margin:0 auto;padding:0 24px}
+/* Contenedor centrado con ancho máximo — el padding lateral evita que el contenido
+   toque los bordes en mobile */
+
 .section-header{margin-bottom:56px}
+/* Espacio generoso entre el encabezado de sección y su contenido */
+
+/* Etiqueta pequeña sobre el título: "Lo que ofrecemos", "Por qué elegirnos", etc. */
 .label{
   display:inline-flex;align-items:center;gap:8px;
   font-size:10px;font-weight:600;letter-spacing:.3em;
   text-transform:uppercase;color:var(--c);margin-bottom:12px;
 }
 .label::before{content:'';width:20px;height:1px;background:var(--c)}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);color:#fff;line-height:.95}
-.section-title em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(0,242,255,0.6)}
+/* Línea decorativa antes de la etiqueta */
+
+/* Títulos de cada sección */
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(36px,5vw,60px);
+  color:#fff;line-height:.95;
+}
+.section-title em{
+  /* La palabra en itálica aparece solo con borde, sin relleno */
+  font-style:normal;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(0,242,255,0.6);
+}
+
+/* ══════════════════════════════════
+   CARRILES — Sliders horizontales
+══════════════════════════════════ */
 .rails-section{padding:110px 0}
-.rail-block{margin-bottom:72px}
+.rail-block{margin-bottom:72px} /* Espacio entre el carril de deportes y el de películas */
+
+/* Encabezado de cada carril: título + "Deslizá →" */
 .rail-header{
   display:flex;align-items:flex-end;justify-content:space-between;
   margin-bottom:20px;padding:0 24px;
   max-width:1200px;margin-left:auto;margin-right:auto;
 }
-.rail-header .label{margin-bottom:0}
-.rail-scroll-hint{
-  font-size:12px;letter-spacing:.15em;color:rgba(200,216,232,0.5);
-  text-transform:uppercase;display:flex;align-items:center;gap:6px;
-}
-.rail-scroll-hint svg{opacity:.5}
+
+/* Contenedor exterior — tiene overflow:hidden para no mostrar la scrollbar
+   en el contenedor padre, solo en el rail interno */
 .rail-outer{padding-left:24px;overflow:hidden}
+
+/* El rail es el contenedor scrolleable */
 .rail{
-  display:flex;gap:14px;overflow-x:auto;
-  padding-bottom:16px;padding-right:24px;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;cursor:grab;
+  display:flex;gap:14px;
+  overflow-x:auto;           /* Permite scroll horizontal */
+  padding-bottom:16px;       /* Espacio para la scrollbar personalizada */
+  padding-right:24px;
+  scroll-snap-type:x mandatory; /* Las tarjetas "encajan" al hacer scroll */
+  -webkit-overflow-scrolling:touch; /* Scroll suave en iOS */
+  cursor:grab;               /* Cursor de "agarrar" para drag-to-scroll */
 }
-.rail:active{cursor:grabbing}
+.rail:active{cursor:grabbing} /* Cursor al estar arrastrando */
+
+/* Scrollbar personalizada — solo visible en Chrome/Safari */
 .rail::-webkit-scrollbar{height:3px}
-.rail::-webkit-scrollbar-track{background:rgba(255,255,255,0.03);border-radius:2px}
-.rail::-webkit-scrollbar-thumb{background:var(--c);border-radius:2px}
+.rail::-webkit-scrollbar-track{background:rgba(255,255,255,0.03)}
+.rail::-webkit-scrollbar-thumb{background:var(--c)} /* La barra en neón */
+
+/* Tarjeta individual de cada carril */
 .rcard{
-  flex:0 0 280px;scroll-snap-align:start;
+  flex:0 0 280px;            /* Ancho fijo, no crece ni encoge */
+  scroll-snap-align:start;   /* La tarjeta se alinea al inicio al hacer snap */
   border-radius:6px;overflow:hidden;
-  position:relative;border:1px solid rgba(255,255,255,0.06);
-  transition:transform .35s cubic-bezier(.25,.46,.45,.94),border-color .35s,box-shadow .35s;
+  position:relative;
+  border:1px solid rgba(255,255,255,0.06);
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94),
+             border-color .35s,box-shadow .35s;
 }
 .rcard:hover{
-  transform:scale(1.04) translateY(-6px);
+  transform:scale(1.04) translateY(-6px); /* Zoom + elevación en hover */
   border-color:rgba(0,242,255,0.3);
   box-shadow:0 20px 40px rgba(0,0,0,0.5),0 0 20px rgba(0,242,255,0.15);
 }
-.rcard img{width:100%;height:175px;object-fit:cover;display:block;transition:transform .5s ease}
-.rcard:hover img{transform:scale(1.08)}
+.rcard img{
+  width:100%;height:175px;
+  object-fit:cover; /* Recorta la imagen para llenar el espacio */
+  display:block;
+  transition:transform .5s ease;
+}
+.rcard:hover img{transform:scale(1.08)} /* La imagen hace zoom al hacer hover en la tarjeta */
+
+/* Overlay oscuro con texto sobre la imagen */
 .rcard-body{
   position:absolute;inset:0;
+  /* Gradiente de abajo hacia arriba: oscuro abajo (donde está el texto), transparente arriba */
   background:linear-gradient(to top,rgba(6,6,8,0.95) 0%,rgba(6,6,8,0.4) 50%,transparent 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;padding:14px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:14px;
 }
-.rcard-tag{font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--c);margin-bottom:4px}
-.rcard-name{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;line-height:1}
+.rcard-tag{
+  /* Texto pequeño arriba del nombre: "Liga Premier", "Blockbuster", etc. */
+  font-size:9px;font-weight:700;letter-spacing:.25em;
+  text-transform:uppercase;color:var(--c);margin-bottom:4px;
+}
+.rcard-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:20px;color:#fff;line-height:1;
+}
+
+/* Badge "VIVO" rojo en esquina superior izquierda */
 .rcard-live{
   position:absolute;top:12px;left:12px;
   display:flex;align-items:center;gap:5px;
-  font-size:9px;font-weight:700;letter-spacing:.15em;
+  font-size:9px;font-weight:700;
   background:rgba(255,40,40,0.9);color:#fff;
   padding:3px 8px;border-radius:3px;text-transform:uppercase;
 }
-.rcard-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;animation:livePulse 1.2s ease infinite}
+.rcard-live::before{
+  content:'';width:5px;height:5px;border-radius:50%;background:#fff;
+  animation:livePulse 1.2s ease infinite; /* Punto parpadeante */
+}
 @keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Badge "HD" o "4K" en esquina superior derecha */
 .rcard-hd{
   position:absolute;top:12px;right:12px;
-  font-size:9px;font-weight:700;letter-spacing:.1em;
+  font-size:9px;font-weight:700;
   background:rgba(0,242,255,0.15);color:var(--c);
   border:1px solid rgba(0,242,255,0.3);
   padding:3px 7px;border-radius:3px;
 }
+
+/* ══════════════════════════════════
+   SERVICIOS — Grilla de 3 columnas
+══════════════════════════════════ */
 .services-section{padding:120px 0;border-top:1px solid rgba(255,255,255,0.04)}
+
 .services-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
-  border:2px solid rgba(0,242,255,0.08);border-radius:8px;overflow:hidden;
+  display:grid;
+  grid-template-columns:repeat(3,1fr); /* 3 columnas iguales */
+  gap:2px; /* Gap mínimo — el borde exterior crea la separación visual */
+  border:2px solid rgba(0,242,255,0.08);
+  border-radius:8px;overflow:hidden;
 }
-.svc-card{
-  padding:52px 40px;background:rgba(255,255,255,0.02);
-  border:none;transition:background .3s;position:relative;overflow:hidden;
-}
+
+.svc-card{padding:52px 40px;background:rgba(255,255,255,0.02);position:relative;overflow:hidden}
+
 .svc-card::before{
-  content:'';position:absolute;bottom:0;left:0;right:0;
-  height:2px;background:var(--c);
-  transform:scaleX(0);transform-origin:left;
+  /* Línea neón que aparece desde la izquierda en hover */
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--c);
+  transform:scaleX(0);transform-origin:left; /* Empieza invisible desde la izquierda */
   transition:transform .4s cubic-bezier(.25,.46,.45,.94);
 }
-.svc-card:hover{background:rgba(0,242,255,0.04)}
-.svc-card:hover::before{transform:scaleX(1)}
-.svc-icon{
-  width:52px;height:52px;margin-bottom:24px;
-  border:1px solid var(--border);border-radius:6px;
-  display:flex;align-items:center;justify-content:center;color:var(--c);
-  transition:box-shadow .3s,border-color .3s;
+.svc-card:hover::before{transform:scaleX(1)} /* Se expande de izquierda a derecha */
+
+.svc-num{
+  /* Número "01", "02", "03" de fondo, decorativo */
+  position:absolute;top:20px;right:24px;
+  font-family:'Bebas Neue',sans-serif;font-size:48px;
+  color:rgba(0,242,255,0.06); /* Casi invisible */
 }
-.svc-card:hover .svc-icon{border-color:rgba(0,242,255,0.4);box-shadow:0 0 20px rgba(0,242,255,0.2)}
-.svc-num{position:absolute;top:20px;right:24px;font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(0,242,255,0.06);line-height:1}
 .svc-title{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;margin-bottom:14px}
 .svc-desc{font-size:15px;color:rgba(215,228,240,0.78);line-height:1.75}
+
+/* ══════════════════════════════════
+   BENEFICIOS — Layout Bento Grid
+   Grid asimétrico: 2 tarjetas grandes arriba + 3 medianas abajo
+══════════════════════════════════ */
 .benefits-section{padding:120px 0}
-.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto;gap:12px}
+
+.bento{
+  display:grid;
+  grid-template-columns:repeat(12,1fr); /* 12 columnas base para flexibilidad */
+  gap:12px;
+}
+/* Cada tarjeta ocupa una cantidad de columnas distinta */
+.b1{grid-column:span 6}  /* Mitad del ancho */
+.b2{grid-column:span 6}  /* Mitad del ancho */
+.b3{grid-column:span 4}  /* Un tercio */
+.b4{grid-column:span 4}  /* Un tercio */
+.b5{grid-column:span 4}  /* Un tercio */
+
 .bento-card{
   background:rgba(255,255,255,0.025);
   border:1px solid rgba(255,255,255,0.06);
@@ -307,495 +516,880 @@ section{position:relative;z-index:10}
   position:relative;overflow:hidden;
   transition:border-color .3s,background .3s,transform .3s;
 }
-.bento-card:hover{border-color:rgba(0,242,255,0.25);background:rgba(0,242,255,0.03);transform:translateY(-4px)}
-.bento-card .bc-icon{color:var(--c);margin-bottom:24px}
-.bento-card .bc-num{position:absolute;bottom:-10px;right:16px;font-family:'Bebas Neue',sans-serif;font-size:80px;color:rgba(0,242,255,0.04);line-height:1;pointer-events:none}
+.bento-card:hover{
+  border-color:rgba(0,242,255,0.25);
+  background:rgba(0,242,255,0.03);
+  transform:translateY(-4px); /* Leve elevación */
+}
+.bc-num{
+  /* Número grande decorativo de fondo en cada tarjeta */
+  position:absolute;bottom:-10px;right:16px;
+  font-family:'Bebas Neue',sans-serif;font-size:80px;
+  color:rgba(0,242,255,0.04);
+}
 .bc-title{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;margin-bottom:12px}
 .bc-desc{font-size:15px;color:rgba(215,228,240,0.78);line-height:1.72;font-weight:400}
-.b1{grid-column:span 6}
-.b2{grid-column:span 6}
-.b3{grid-column:span 4}
-.b4{grid-column:span 4}
-.b5{grid-column:span 4}
-.steps-section{padding:110px 0;border-top:1px solid rgba(255,255,255,0.04);overflow:hidden}
-.steps-timeline{display:grid;grid-template-columns:1fr 1fr 1fr;position:relative;gap:0}
-.steps-timeline::before{
-  content:'';position:absolute;
-  top:45px;left:calc(16.666% + 20px);right:calc(16.666% + 20px);
-  height:1px;background:linear-gradient(90deg,var(--c),rgba(0,242,255,0.2),var(--c));z-index:0;
+
+/* ══════════════════════════════════
+   PASOS — Timeline horizontal de 3 pasos
+══════════════════════════════════ */
+.steps-section{padding:110px 0;border-top:1px solid rgba(255,255,255,0.04)}
+
+.steps-timeline{
+  display:grid;grid-template-columns:1fr 1fr 1fr; /* 3 columnas iguales */
+  position:relative; /* Necesario para posicionar la línea conectora */
 }
-.step{text-align:center;padding:0 24px;position:relative;z-index:1}
+.steps-timeline::before{
+  /* Línea horizontal que conecta los 3 pasos */
+  content:'';position:absolute;
+  top:45px; /* Alineada con el centro de los círculos */
+  left:calc(16.666% + 20px); /* Empieza en el centro del primer círculo */
+  right:calc(16.666% + 20px); /* Termina en el centro del tercer círculo */
+  height:1px;
+  background:linear-gradient(90deg,var(--c),rgba(0,242,255,0.2),var(--c));
+  /* Gradiente: brillante en los extremos, tenue en el centro */
+}
+
+/* Círculo con ícono de cada paso */
 .step-circle{
   width:90px;height:90px;border-radius:50%;
-  background:var(--bg);border:1px solid var(--border);
+  background:var(--bg); /* Mismo color que el fondo para "cortar" la línea conectora */
+  border:1px solid var(--border);
   display:flex;align-items:center;justify-content:center;
-  margin:0 auto 32px;position:relative;
-  transition:border-color .3s,box-shadow .3s;
+  margin:0 auto 32px;
+  position:relative;
 }
-.step:hover .step-circle{border-color:rgba(0,242,255,0.5);box-shadow:0 0 30px rgba(0,242,255,0.2)}
-.step-circle::before{content:'';position:absolute;inset:-1px;border-radius:50%;background:conic-gradient(var(--c) 0deg,transparent 120deg);opacity:.4;z-index:-1}
-.step-num{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.3em;color:var(--c);margin-bottom:8px}
+.step-circle::before{
+  /* Arco de color alrededor del círculo */
+  content:'';position:absolute;inset:-1px;border-radius:50%;
+  background:conic-gradient(var(--c) 0deg,transparent 120deg);
+  /* Gradiente cónico: 1/3 del círculo en neón, el resto transparente */
+  opacity:.4;z-index:-1;
+}
+.step-num{font-size:11px;letter-spacing:.3em;color:var(--c);margin-bottom:8px}
 .step-title{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;margin-bottom:12px}
 .step-desc{font-size:15px;color:rgba(215,228,240,0.75);line-height:1.72;max-width:220px;margin:0 auto}
+
+/* ══════════════════════════════════
+   REQUISITOS — Barra horizontal
+══════════════════════════════════ */
 .req-section{padding:80px 0}
+
 .req-bar{
-  border:1px solid var(--border);border-radius:6px;padding:44px 48px;
-  background:rgba(0,242,255,0.02);
+  border:1px solid var(--border);border-radius:6px;
+  padding:44px 48px;background:rgba(0,242,255,0.02);
   display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:28px;position:relative;overflow:hidden;
+  flex-wrap:wrap;gap:28px; /* flex-wrap para que se apile en mobile */
+  position:relative;overflow:hidden;
 }
-.req-bar::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 12px var(--c)}
-.req-bar-left h3{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;margin-bottom:4px}
-.req-bar-left p{font-size:14px;color:rgba(215,228,240,0.6)}
-.req-items{display:flex;flex-wrap:wrap;gap:28px}
-.req-item{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:rgba(220,232,245,0.85)}
-.req-item svg{color:var(--c);flex-shrink:0}
+.req-bar::before{
+  /* Acento vertical neón a la izquierda */
+  content:'';position:absolute;top:0;left:0;bottom:0;
+  width:3px;background:var(--c);box-shadow:0 0 12px var(--c);
+}
+.req-item{
+  display:flex;align-items:center;gap:10px;
+  font-size:15px;font-weight:500;
+  color:rgba(220,232,245,0.85); /* Buen contraste para lectura */
+}
+
+/* ══════════════════════════════════
+   CTA FINAL — Llamada a la acción
+══════════════════════════════════ */
 .cta-section{padding:120px 24px;position:relative;overflow:hidden;text-align:center}
+
+/* Gradientes de fondo del CTA */
 .cta-bg{
   position:absolute;inset:0;
   background:
     radial-gradient(ellipse 70% 70% at 50% 50%,rgba(0,80,120,0.3) 0%,transparent 70%),
     radial-gradient(ellipse 30% 30% at 20% 80%,rgba(0,242,255,0.08) 0%,transparent 60%);
 }
+
+/* Palabra "HOY" gigante de fondo, solo con borde */
 .cta-ghost{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,20vw,280px);
-  color:transparent;-webkit-text-stroke:1px rgba(0,242,255,0.04);
-  white-space:nowrap;pointer-events:none;user-select:none;line-height:1;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(100px,20vw,280px);
+  color:transparent;
+  -webkit-text-stroke:1px rgba(0,242,255,0.04); /* Casi invisible */
+  white-space:nowrap;pointer-events:none;user-select:none;
 }
-.cta-content{position:relative;z-index:2}
-.cta-label{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:10px;font-weight:600;letter-spacing:.3em;
-  text-transform:uppercase;color:var(--c);margin-bottom:24px;
+
+.cta-h2{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(50px,8vw,100px);
+  color:#fff;line-height:.9;margin-bottom:24px;
 }
-.cta-label::before,.cta-label::after{content:'';width:32px;height:1px;background:var(--c)}
-.cta-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(50px,8vw,100px);color:#fff;line-height:.9;margin-bottom:24px}
-.cta-h2 span{color:transparent;-webkit-text-stroke:2px var(--c);text-shadow:0 0 40px rgba(0,242,255,0.3);display:block}
-.cta-sub{font-size:17px;color:rgba(215,228,240,0.75);max-width:460px;margin:0 auto 52px;line-height:1.75;font-weight:400}
+.cta-h2 span{
+  /* "hoy mismo" — solo borde, sin relleno */
+  color:transparent;-webkit-text-stroke:2px var(--c);
+  text-shadow:0 0 40px rgba(0,242,255,0.3);display:block;
+}
+.cta-sub{font-size:17px;color:rgba(215,228,240,0.75);max-width:460px;margin:0 auto 52px;line-height:1.75}
+
+/* ══════════════════════════════════
+   FOOTER
+══════════════════════════════════ */
 footer{border-top:1px solid rgba(255,255,255,0.05);padding:32px 24px}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.footer-logo{display:flex;align-items:center;gap:10px}
-.footer-logo img{width:34px;height:34px;border-radius:50%;object-fit:cover;opacity:.8}
-.footer-logo span{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:.1em}
-footer p{font-size:13px;color:rgba(200,216,232,0.45);letter-spacing:.04em}
-footer a{color:var(--c);font-size:12px;text-decoration:none;letter-spacing:.08em;transition:opacity .2s}
-footer a:hover{opacity:.7}
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+
+/* ══════════════════════════════════
+   BOTÓN FLOTANTE DE WHATSAPP
+══════════════════════════════════ */
 .wa-float{
   position:fixed;bottom:28px;right:28px;z-index:500;
   width:56px;height:56px;border-radius:50%;background:var(--c);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 0 24px rgba(0,242,255,0.6),0 0 60px rgba(0,242,255,0.2);
-  text-decoration:none;animation:waFloat 3s ease infinite;transition:transform .2s;
+  text-decoration:none;
+  animation:waFloat 3s ease infinite; /* Animación de pulso del glow */
 }
-.wa-float:hover{transform:scale(1.1)}
 @keyframes waFloat{
+  /* El glow se expande y contrae continuamente */
   0%,100%{box-shadow:0 0 24px rgba(0,242,255,0.6),0 0 60px rgba(0,242,255,0.2)}
   50%{box-shadow:0 0 36px rgba(0,242,255,0.9),0 0 80px rgba(0,242,255,0.35)}
 }
-@keyframes slideRight{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══════════════════════════════════
+   ANIMACIONES GLOBALES
+══════════════════════════════════ */
+
+/* Aparece deslizándose desde la izquierda — usado en el hero */
+@keyframes slideRight{
+  from{opacity:0;transform:translateX(-30px)}
+  to{opacity:1;transform:translateX(0)}
+}
+
+/* Aparece subiendo desde abajo — usado en stats y scroll indicator */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ── Scroll Reveal ──
+   Los elementos empiezan invisibles y aparecen cuando entran en pantalla.
+   JavaScript detecta cuándo son visibles y agrega la clase .visible */
+.reveal{
+  opacity:0;
+  transform:translateY(32px); /* Empieza 32px más abajo */
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:translateY(0)} /* Estado final visible */
+
+/* Delays escalonados para que los elementos aparezcan uno tras otro */
 .reveal-d1{transition-delay:.1s}
 .reveal-d2{transition-delay:.2s}
 .reveal-d3{transition-delay:.3s}
 .reveal-d4{transition-delay:.4s}
+
+/* ══════════════════════════════════
+   RESPONSIVE — Adaptaciones para pantallas chicas
+══════════════════════════════════ */
 @media(max-width:900px){
-  body{cursor:auto}
-  #cursor,#cursor-ring{display:none}
-  .services-grid{grid-template-columns:1fr}
-  .bento{grid-template-columns:1fr 1fr}
-  .b1,.b2,.b3,.b4,.b5{grid-column:span 2}
-  .steps-timeline{grid-template-columns:1fr}
-  .steps-timeline::before{display:none}
-  .hero-stats{gap:32px}
+  /* Tablet y abajo */
+  body{cursor:auto}               /* Restaura el cursor nativo */
+  #cursor,#cursor-ring{display:none} /* Oculta el cursor personalizado */
+  .services-grid{grid-template-columns:1fr} /* Servicios apilados */
+  .bento{grid-template-columns:1fr 1fr}     /* Bento en 2 columnas */
+  .b1,.b2,.b3,.b4,.b5{grid-column:span 2}  /* Todas ocupan el ancho completo */
+  .steps-timeline{grid-template-columns:1fr} /* Pasos apilados verticalmente */
+  .steps-timeline::before{display:none}      /* Oculta la línea conectora */
 }
 @media(max-width:640px){
-  .hero-h1{font-size:52px}
+  /* Mobile */
+  .hero-h1{font-size:52px}          /* Título más pequeño en móvil */
   .hero-stats{flex-wrap:wrap;gap:24px}
-  .bento{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr} /* Bento en 1 columna */
   .b1,.b2,.b3,.b4,.b5{grid-column:span 1}
-  .req-bar{flex-direction:column;align-items:flex-start}
+  .req-bar{flex-direction:column;align-items:flex-start} /* Requisitos apilados */
   .footer-inner{flex-direction:column;text-align:center}
 }
 </style>
 </head>
 <body>
 
+<!-- ══════════════════════════════════
+     ELEMENTOS DE INTERFAZ GLOBAL
+     Están fuera de las secciones porque son fixed (cubren toda la pantalla)
+══════════════════════════════════ -->
+
+<!-- Punto central del cursor personalizado -->
 <div id="cursor"></div>
+<!-- Anillo exterior del cursor con inercia -->
 <div id="cursor-ring"></div>
+<!-- Canvas donde JavaScript dibuja las partículas animadas -->
 <canvas id="particles"></canvas>
 
+
+<!-- ══════════════════════════════════
+     NAVBAR — Barra de navegación fija
+     Se vuelve glass al hacer scroll gracias a la clase .scrolled
+══════════════════════════════════ -->
 <nav id="navbar">
+  <!-- Logo: enlace que lleva al inicio de la página -->
   <a href="#" class="nav-logo">
     <img src="logo.jpg" alt="Kleiin MW"/>
   </a>
+  <!-- Botón de soporte: abre WhatsApp directo -->
   <a href="https://wa.me/543794082942?text=Necesito%20soporte" target="_blank" rel="noopener" class="btn-support">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+    <!-- Ícono de auriculares SVG inline — no depende de librerías externas -->
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+    </svg>
     Soporte
   </a>
 </nav>
 
+
+<!-- ══════════════════════════════════
+     HERO — Pantalla completa de bienvenida
+══════════════════════════════════ -->
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-lines"></div>
-  <div class="hero-ambient">4K</div>
+  <!-- Capas de fondo decorativas (no tienen contenido, solo CSS) -->
+  <div class="hero-bg"></div>       <!-- Gradientes radiales de color -->
+  <div class="hero-lines"></div>    <!-- Grilla de líneas verticales sutiles -->
+  <div class="hero-ambient">4K</div> <!-- Número gigante decorativo de fondo -->
+
+  <!-- Contenido principal del hero -->
   <div class="hero-content">
+    <!-- Eyebrow: texto pequeño sobre el título -->
     <div class="hero-eyebrow">Corrientes Capital · Disponible ahora</div>
+
+    <!-- Título principal: H1 para SEO y jerarquía -->
     <h1 class="hero-h1">
       Todo el<br/>entretenimiento
+      <!-- span aplica el estilo de texto outline (solo borde) -->
       <span>en un solo lugar</span>
     </h1>
-    <p class="hero-sub">Accedé al mejor contenido premium, deportes en vivo y series en alta definición desde cualquier dispositivo.</p>
+
+    <!-- Subtítulo descriptivo -->
+    <p class="hero-sub">
+      Accedé al mejor contenido premium, deportes en vivo y series en alta definición desde cualquier dispositivo.
+    </p>
+
+    <!-- Botones de acción -->
     <div class="hero-actions">
+      <!-- CTA principal: abre WhatsApp con mensaje predefinido -->
+      <!-- %20 = espacio, %2C = coma en URL encoding -->
       <a href="https://wa.me/543794082942?text=Quiero%20contratar%20el%20servicio%20premium" target="_blank" rel="noopener" class="btn-primary">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.117 1.533 5.845L.057 23.01a.75.75 0 00.932.932l5.165-1.476A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.732 9.732 0 01-4.97-1.366l-.356-.21-3.685 1.052 1.053-3.686-.21-.356A9.733 9.733 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+        <!-- Ícono de WhatsApp en SVG inline -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967..."/>
+          <path d="M12 0C5.373 0 0 5.373 0 12..."/>
+        </svg>
         Contactar por WhatsApp
       </a>
+      <!-- Botón secundario: scroll suave hacia #servicios -->
       <a href="#servicios" class="btn-secondary">
         Ver servicios
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/> <!-- Flecha → -->
+        </svg>
       </a>
     </div>
   </div>
+
+  <!-- Estadísticas en la parte inferior del hero -->
   <div class="hero-stats">
-    <div class="stat-item"><div class="stat-num">24<span>/7</span></div><div class="stat-label">Soporte</div></div>
-    <div class="stat-item"><div class="stat-num"><span>+</span>10K</div><div class="stat-label">Canales</div></div>
-    <div class="stat-item"><div class="stat-num">4<span>K</span></div><div class="stat-label">Calidad</div></div>
-    <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-label">Contenido</div></div>
+    <div class="stat-item">
+      <div class="stat-num">24<span>/7</span></div>
+      <div class="stat-label">Soporte</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><span>+</span>10K</div>
+      <div class="stat-label">Canales</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4<span>K</span></div>
+      <div class="stat-label">Calidad</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><span>∞</span></div>
+      <div class="stat-label">Contenido</div>
+    </div>
   </div>
+
+  <!-- Indicador visual de scroll -->
   <div class="scroll-ind">Scroll</div>
 </section>
 
+
+<!-- ══════════════════════════════════
+     CARRILES — Sliders horizontales
+     Dos carriles: Deportes y Películas/Series
+══════════════════════════════════ -->
 <section class="rails-section">
+
+  <!-- ── Carril 1: Deportes en Vivo ── -->
   <div class="rail-block">
+    <!-- Encabezado del carril -->
     <div class="rail-header">
       <div>
         <div class="label">En vivo ahora</div>
         <div class="section-title">Deportes <em>en Vivo</em></div>
       </div>
-      <div class="rail-scroll-hint">Deslizá <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
-    </div>
-    <div class="rail-outer">
-      <div class="rail" id="rail1">
-        <div class="rcard">
-          <img src="deportes/futbol.png" alt="Fútbol"/>
-          <div class="rcard-body"><div class="rcard-tag">Liga Premier</div><div class="rcard-name">Fútbol</div></div>
-          <div class="rcard-live">VIVO</div><div class="rcard-hd">HD</div>
-        </div>
-        <div class="rcard">
-          <img src="deportes/carreras.png" alt="Carreras"/>
-          <div class="rcard-body"><div class="rcard-tag">Gran Premio</div><div class="rcard-name">Carreras F1</div></div>
-          <div class="rcard-live">VIVO</div><div class="rcard-hd">4K</div>
-        </div>
-        <div class="rcard">
-          <img src="deportes/basquet.png" alt="Básquet"/>
-          <div class="rcard-body"><div class="rcard-tag">NBA · Finals</div><div class="rcard-name">Básquet</div></div>
-          <div class="rcard-live">VIVO</div><div class="rcard-hd">HD</div>
-        </div>
-        <div class="rcard">
-          <img src="deportes/tenis.png" alt="Tenis"/>
-          <div class="rcard-body"><div class="rcard-tag">Grand Slam</div><div class="rcard-name">Tenis</div></div>
-          <div class="rcard-hd">HD</div>
-        </div>
-        <div class="rcard">
-          <img src="deportes/boxeo.png" alt="Boxeo"/>
-          <div class="rcard-body"><div class="rcard-tag">Pelea Estelar</div><div class="rcard-name">Boxeo</div></div>
-          <div class="rcard-live">VIVO</div><div class="rcard-hd">4K</div>
-        </div>
-        <div class="rcard">
-          <img src="deportes/mas-deportes.png" alt="Más deportes"/>
-          <div class="rcard-body"><div class="rcard-tag">Y mucho más</div><div class="rcard-name">+100 Deportes</div></div>
-          <div class="rcard-hd">HD</div>
-        </div>
+      <div class="rail-scroll-hint">
+        Deslizá
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
       </div>
     </div>
-  </div>
 
+    <!-- rail-outer contiene el overflow, rail es el que hace scroll -->
+    <div class="rail-outer">
+      <div class="rail" id="rail1">
+
+        <!-- Tarjeta individual — repetir este bloque para agregar más -->
+        <div class="rcard">
+          <img src="deportes/futbol.png" alt="Fútbol"/>
+          <div class="rcard-body">
+            <div class="rcard-tag">Liga Premier</div>   <!-- Categoría -->
+            <div class="rcard-name">Fútbol</div>         <!-- Nombre principal -->
+          </div>
+          <div class="rcard-live">VIVO</div>  <!-- Badge rojo parpadeante -->
+          <div class="rcard-hd">HD</div>      <!-- Badge de calidad -->
+        </div>
+
+        <div class="rcard">
+          <img src="deportes/carreras.png" alt="Carreras"/>
+          <div class="rcard-body">
+            <div class="rcard-tag">Gran Premio</div>
+            <div class="rcard-name">Carreras F1</div>
+          </div>
+          <div class="rcard-live">VIVO</div>
+          <div class="rcard-hd">4K</div>
+        </div>
+
+        <div class="rcard">
+          <img src="deportes/basquet.png" alt="Básquet"/>
+          <div class="rcard-body">
+            <div class="rcard-tag">NBA · Finals</div>
+            <div class="rcard-name">Básquet</div>
+          </div>
+          <div class="rcard-live">VIVO</div>
+          <div class="rcard-hd">HD</div>
+        </div>
+
+        <div class="rcard">
+          <img src="deportes/tenis.png" alt="Tenis"/>
+          <div class="rcard-body">
+            <div class="rcard-tag">Grand Slam</div>
+            <div class="rcard-name">Tenis</div>
+          </div>
+          <!-- Sin badge VIVO — este no está en directo -->
+          <div class="rcard-hd">HD</div>
+        </div>
+
+        <div class="rcard">
+          <img src="deportes/boxeo.png" alt="Boxeo"/>
+          <div class="rcard-body">
+            <div class="rcard-tag">Pelea Estelar</div>
+            <div class="rcard-name">Boxeo</div>
+          </div>
+          <div class="rcard-live">VIVO</div>
+          <div class="rcard-hd">4K</div>
+        </div>
+
+        <div class="rcard">
+          <img src="deportes/mas-deportes.png" alt="Más deportes"/>
+          <div class="rcard-body">
+            <div class="rcard-tag">Y mucho más</div>
+            <div class="rcard-name">+100 Deportes</div>
+          </div>
+          <div class="rcard-hd">HD</div>
+        </div>
+
+      </div><!-- fin .rail -->
+    </div><!-- fin .rail-outer -->
+  </div><!-- fin .rail-block deportes -->
+
+
+  <!-- ── Carril 2: Películas y Series ── -->
   <div class="rail-block">
     <div class="rail-header">
       <div>
         <div class="label">Catálogo Premium</div>
         <div class="section-title">Películas <em>&amp; Series</em></div>
+        <!-- &amp; es el caracter & en HTML seguro -->
       </div>
-      <div class="rail-scroll-hint">Deslizá <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      <div class="rail-scroll-hint">
+        Deslizá
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
     </div>
+
     <div class="rail-outer">
       <div class="rail" id="rail2">
+
         <div class="rcard">
           <img src="peliculas/accion.png" alt="Acción"/>
-          <div class="rcard-body"><div class="rcard-tag">Blockbuster</div><div class="rcard-name">Acción</div></div>
+          <div class="rcard-body">
+            <div class="rcard-tag">Blockbuster</div>
+            <div class="rcard-name">Acción</div>
+          </div>
           <div class="rcard-hd">4K</div>
         </div>
+
         <div class="rcard">
           <img src="peliculas/drama.png" alt="Drama"/>
-          <div class="rcard-body"><div class="rcard-tag">Premiada</div><div class="rcard-name">Drama</div></div>
+          <div class="rcard-body">
+            <div class="rcard-tag">Premiada</div>
+            <div class="rcard-name">Drama</div>
+          </div>
           <div class="rcard-hd">HD</div>
         </div>
+
         <div class="rcard">
           <img src="peliculas/estrenos.png" alt="Estrenos"/>
-          <div class="rcard-body"><div class="rcard-tag">Recién salido</div><div class="rcard-name">Estrenos</div></div>
+          <div class="rcard-body">
+            <div class="rcard-tag">Recién salido</div>
+            <div class="rcard-name">Estrenos</div>
+          </div>
+          <!-- Badge dorado especial para estrenos — inline style para sobrescribir el rojo -->
           <div class="rcard-live" style="background:rgba(240,192,96,0.9);color:#000">NUEVO</div>
           <div class="rcard-hd">4K</div>
         </div>
+
         <div class="rcard">
           <img src="peliculas/comedia.png" alt="Comedia"/>
-          <div class="rcard-body"><div class="rcard-tag">Feel Good</div><div class="rcard-name">Comedia</div></div>
+          <div class="rcard-body">
+            <div class="rcard-tag">Feel Good</div>
+            <div class="rcard-name">Comedia</div>
+          </div>
           <div class="rcard-hd">HD</div>
         </div>
+
         <div class="rcard">
-          <img src="peliculas/scifi.png" alt="Sci-Fi"/>
-          <div class="rcard-body"><div class="rcard-tag">Ciencia Ficción</div><div class="rcard-name">Sci-Fi</div></div>
+          <img src="peliculas/scifc.png" alt="Sci-Fi"/>
+          <div class="rcard-body">
+            <div class="rcard-tag">Ciencia Ficción</div>
+            <div class="rcard-name">Sci-Fi</div>
+          </div>
           <div class="rcard-hd">4K</div>
         </div>
+
         <div class="rcard">
           <img src="peliculas/thriller.png" alt="Thriller"/>
-          <div class="rcard-body"><div class="rcard-tag">Suspenso</div><div class="rcard-name">Thriller</div></div>
+          <div class="rcard-body">
+            <div class="rcard-tag">Suspenso</div>
+            <div class="rcard-name">Thriller</div>
+          </div>
           <div class="rcard-hd">HD</div>
         </div>
+
       </div>
     </div>
   </div>
-</section>
 
+</section><!-- fin rails-section -->
+
+
+<!-- ══════════════════════════════════
+     SERVICIOS — id="servicios" permite que el botón "Ver servicios" del hero
+     haga scroll hasta acá
+══════════════════════════════════ -->
 <section id="servicios" class="services-section">
   <div class="section-inner">
+
+    <!-- reveal: empieza invisible, aparece al hacer scroll (JS) -->
     <div class="section-header reveal">
       <div class="label">Lo que ofrecemos</div>
       <div class="section-title">Nuestros <em>Servicios</em></div>
     </div>
+
     <div class="services-grid reveal">
+
+      <!-- Servicio 1 -->
       <div class="svc-card">
-        <div class="svc-num">01</div>
+        <div class="svc-num">01</div> <!-- Número decorativo de fondo -->
         <div class="svc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
+          <!-- Ícono SVG de monitor/pantalla -->
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25..."/>
+          </svg>
         </div>
         <div class="svc-title">Deportes en Vivo</div>
         <div class="svc-desc">Seguí los eventos deportivos más importantes en tiempo real, con calidad HD y 4K sin interrupciones.</div>
       </div>
+
+      <!-- Servicio 2 -->
       <div class="svc-card">
         <div class="svc-num">02</div>
         <div class="svc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 19.5m9.75-14.25v12m0 0h-9.75"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25..."/>
+          </svg>
         </div>
         <div class="svc-title">Películas y Series</div>
         <div class="svc-desc">Miles de títulos en alta definición. Estrenos, sagas completas y series de temporadas disponibles al instante.</div>
       </div>
+
+      <!-- Servicio 3 -->
       <div class="svc-card">
         <div class="svc-num">03</div>
         <div class="svc-icon">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/></svg>
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479..."/>
+          </svg>
         </div>
         <div class="svc-title">Contenido Familiar</div>
         <div class="svc-desc">Entretenimiento seguro y variado para cada integrante. Animaciones, documentales y canales para todas las edades.</div>
       </div>
+
     </div>
   </div>
 </section>
 
+
+<!-- ══════════════════════════════════
+     BENEFICIOS — Bento Grid asimétrico
+     b1+b2 = fila superior (mitades)
+     b3+b4+b5 = fila inferior (tercios)
+══════════════════════════════════ -->
 <section class="benefits-section">
   <div class="section-inner">
     <div class="section-header reveal">
       <div class="label">Por qué elegirnos</div>
       <div class="section-title">Ventajas <em>Reales</em></div>
     </div>
+
     <div class="bento">
+
+      <!-- Tarjeta grande izquierda -->
       <div class="bento-card b1 reveal reveal-d1">
-        <div class="bc-icon"><svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg></div>
+        <!-- reveal-d1: aparece con .1s de delay respecto a b2 -->
+        <div class="bc-icon"><svg ...></svg></div>
         <div class="bc-title">Instalación Inmediata</div>
-        <div class="bc-desc">Sin esperas. Activamos el servicio en cuestión de minutos desde que nos contactás. Sin técnicos, sin visitas, sin complicaciones.</div>
-        <div class="bc-num">01</div>
+        <div class="bc-desc">Sin esperas. Activamos el servicio en cuestión de minutos desde que nos contactás.</div>
+        <div class="bc-num">01</div> <!-- Número decorativo de fondo -->
       </div>
+
+      <!-- Tarjeta grande derecha -->
       <div class="bento-card b2 reveal reveal-d2">
-        <div class="bc-icon"><svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
+        <div class="bc-icon"><svg ...></svg></div>
         <div class="bc-title">Sin Contratos Largos</div>
-        <div class="bc-desc">Libertad total. Pagás por el período que querés. Sin permanencia mínima, sin letras chicas, sin ataduras.</div>
+        <div class="bc-desc">Libertad total. Pagás por el período que querés.</div>
         <div class="bc-num">02</div>
       </div>
+
+      <!-- Tres tarjetas medianas -->
       <div class="bento-card b3 reveal reveal-d1">
-        <div class="bc-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/></svg></div>
+        <div class="bc-icon"><svg ...></svg></div>
         <div class="bc-title">Config. Personalizada</div>
         <div class="bc-desc">Adaptamos cada detalle a tu dispositivo y preferencias.</div>
         <div class="bc-num">03</div>
       </div>
+
       <div class="bento-card b4 reveal reveal-d2">
-        <div class="bc-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg></div>
+        <div class="bc-icon"><svg ...></svg></div>
         <div class="bc-title">Soporte 24/7</div>
-        <div class="bc-desc">Disponibles a cualquier hora para resolver cualquier inconveniente al instante.</div>
+        <div class="bc-desc">Disponibles a cualquier hora para resolver cualquier inconveniente.</div>
         <div class="bc-num">04</div>
       </div>
+
+      <!-- Tarjeta especial dorada — inline style sobrescribe el color neón por dorado -->
       <div class="bento-card b5 reveal reveal-d3" style="background:rgba(0,242,255,0.04);border-color:rgba(0,242,255,0.15)">
-        <div class="bc-icon" style="color:var(--gold)"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg></div>
+        <div class="bc-icon" style="color:var(--gold)"><svg ...></svg></div>
         <div class="bc-title" style="color:var(--gold)">Calidad Premium</div>
-        <div class="bc-desc">HD y 4K garantizados con transmisión estable. La mejor experiencia de visualización en cada pantalla.</div>
+        <div class="bc-desc">HD y 4K garantizados con transmisión estable.</div>
         <div class="bc-num" style="color:rgba(240,192,96,0.06)">★</div>
       </div>
+
     </div>
   </div>
 </section>
 
+
+<!-- ══════════════════════════════════
+     PASOS — Cómo funciona el servicio
+══════════════════════════════════ -->
 <section class="steps-section">
   <div class="section-inner">
     <div class="section-header reveal" style="text-align:center">
       <div class="label" style="justify-content:center">Simple y rápido</div>
       <div class="section-title">¿Cómo <em>Funciona?</em></div>
     </div>
+
+    <!-- steps-timeline::before dibuja la línea conectora entre los 3 pasos -->
     <div class="steps-timeline">
+
       <div class="step reveal reveal-d1">
-        <div class="step-circle"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg></div>
+        <div class="step-circle">
+          <!-- Ícono de chat/mensaje -->
+          <svg ...></svg>
+        </div>
         <div class="step-num">PASO 01</div>
         <div class="step-title">Contactanos</div>
         <div class="step-desc">Escribinos por WhatsApp, elegí tu plan y te asesoramos sin compromiso.</div>
       </div>
+
       <div class="step reveal reveal-d2">
-        <div class="step-circle"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div class="step-circle">
+          <!-- Ícono de descarga -->
+          <svg ...></svg>
+        </div>
         <div class="step-num">PASO 02</div>
         <div class="step-title">Instalamos</div>
         <div class="step-desc">Configuramos el servicio en tu dispositivo de forma remota e inmediata.</div>
       </div>
+
       <div class="step reveal reveal-d3">
-        <div class="step-circle"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/></svg></div>
+        <div class="step-circle">
+          <!-- Ícono de play -->
+          <svg ...></svg>
+        </div>
         <div class="step-num">PASO 03</div>
         <div class="step-title">Disfrutás</div>
-        <div class="step-desc">Relajate y accedé a todo el contenido premium sin límites desde cualquier pantalla.</div>
+        <div class="step-desc">Relajate y accedé a todo el contenido premium sin límites.</div>
       </div>
+
     </div>
   </div>
 </section>
 
+
+<!-- ══════════════════════════════════
+     REQUISITOS — Barra informativa
+══════════════════════════════════ -->
 <section class="req-section">
   <div class="section-inner">
     <div class="req-bar reveal">
+
+      <!-- Texto izquierdo -->
       <div class="req-bar-left">
         <h3>Requisitos Mínimos</h3>
         <p>Eso es todo lo que necesitás para empezar</p>
       </div>
+
+      <!-- Items de requisitos a la derecha -->
       <div class="req-items">
         <div class="req-item">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.288 15.038a5.25 5.25 0 017.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 011.06 0z"/></svg>
+          <svg ...></svg> <!-- Ícono WiFi -->
           Internet estable
         </div>
         <div class="req-item">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18h3"/></svg>
+          <svg ...></svg> <!-- Ícono smartphone -->
           Cualquier dispositivo
         </div>
         <div class="req-item">
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
+          <svg ...></svg> <!-- Ícono pin de ubicación -->
           Corrientes Capital
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
+
+<!-- ══════════════════════════════════
+     CTA FINAL — Llamada a la acción principal
+══════════════════════════════════ -->
 <section class="cta-section">
-  <div class="cta-bg"></div>
-  <div class="cta-ghost">HOY</div>
+  <div class="cta-bg"></div>          <!-- Gradientes de fondo -->
+  <div class="cta-ghost">HOY</div>    <!-- Texto gigante decorativo de fondo -->
+
   <div class="cta-content reveal">
     <div class="cta-label">Sin excusas</div>
-    <h2 class="cta-h2">Empezá a disfrutar<span>hoy mismo</span></h2>
-    <p class="cta-sub">Escribinos y en minutos tenés el mejor entretenimiento en tu dispositivo, sin complicaciones.</p>
-    <a href="https://wa.me/543794082942?text=Hola%2C%20quiero%20contratar%20el%20servicio%20premium" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.117 1.533 5.845L.057 23.01a.75.75 0 00.932.932l5.165-1.476A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.732 9.732 0 01-4.97-1.366l-.356-.21-3.685 1.052 1.053-3.686-.21-.356A9.733 9.733 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+
+    <h2 class="cta-h2">
+      Empezá a disfrutar
+      <span>hoy mismo</span> <!-- "hoy mismo" en estilo outline/neón -->
+    </h2>
+
+    <p class="cta-sub">
+      Escribinos y en minutos tenés el mejor entretenimiento en tu dispositivo, sin complicaciones.
+    </p>
+
+    <!-- Botón principal de WhatsApp — mismo estilo que el del hero -->
+    <a href="https://wa.me/543794082942?text=Hola%2C%20quiero%20contratar%20el%20servicio%20premium"
+       target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex">
+      <svg ...></svg> <!-- Ícono WhatsApp -->
       Contactar por WhatsApp ahora
     </a>
   </div>
 </section>
 
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
 <footer>
   <div class="footer-inner">
+    <!-- Logo + nombre -->
     <div class="footer-logo">
       <img src="logo.jpg" alt="Kleiin MW"/>
       <span>KLEIIN MW</span>
     </div>
+    <!-- Texto de copyright -->
     <p>© 2025 Kleiin MW · Cybersecurity & Web Development · Corrientes, Argentina</p>
+    <!-- Número de teléfono como enlace clickeable a WhatsApp -->
     <a href="https://wa.me/543794082942" target="_blank" rel="noopener">+54 379 408-2942</a>
   </div>
 </footer>
 
-<a href="https://wa.me/543794082942?text=Hola%2C%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.117 1.533 5.845L.057 23.01a.75.75 0 00.932.932l5.165-1.476A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.732 9.732 0 01-4.97-1.366l-.356-.21-3.685 1.052 1.053-3.686-.21-.356A9.733 9.733 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+
+<!-- ══════════════════════════════════
+     BOTÓN FLOTANTE DE WHATSAPP
+     position:fixed — siempre visible en esquina inferior derecha
+══════════════════════════════════ -->
+<a href="https://wa.me/543794082942?text=Hola%2C%20quiero%20informaci%C3%B3n"
+   target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
+  <svg ...></svg>
 </a>
 
+
+<!-- ══════════════════════════════════
+     JAVASCRIPT
+     Todo el comportamiento dinámico de la página
+══════════════════════════════════ -->
 <script>
+
+/* ── Cursor personalizado ──
+   Sigue la posición del mouse en tiempo real
+   El punto sigue exacto, el anillo sigue con inercia (más suave) */
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e=>{
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+let mx=0, my=0;  // Posición actual del mouse
+let rx=0, ry=0;  // Posición actual del anillo (se actualiza gradualmente)
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  // El punto sigue al mouse de forma instantánea
+  cursor.style.left = mx + 'px';
+  cursor.style.top  = my + 'px';
 });
-function animRing(){
-  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
-  ring.style.left=rx+'px'; ring.style.top=ry+'px';
-  requestAnimationFrame(animRing);
+
+function animRing() {
+  // El anillo se acerca al mouse un 12% por frame — crea la inercia
+  rx += (mx - rx) * .12;
+  ry += (my - ry) * .12;
+  ring.style.left = rx + 'px';
+  ring.style.top  = ry + 'px';
+  requestAnimationFrame(animRing); // Se llama a sí mismo ~60 veces por segundo
 }
 animRing();
 
-const navbar=document.getElementById('navbar');
-window.addEventListener('scroll',()=>{
-  navbar.classList.toggle('scrolled',window.scrollY>60);
-},{passive:true});
 
-const reveals=document.querySelectorAll('.reveal');
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
-},{threshold:.12});
-reveals.forEach(el=>io.observe(el));
+/* ── Navbar con efecto glass al hacer scroll ──
+   Agrega la clase .scrolled cuando el usuario baja más de 60px */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true }); // passive:true mejora el rendimiento del scroll
 
-document.querySelectorAll('.rail').forEach(rail=>{
-  let isDown=false,startX,scrollLeft;
-  rail.addEventListener('mousedown',e=>{isDown=true;startX=e.pageX-rail.offsetLeft;scrollLeft=rail.scrollLeft});
-  rail.addEventListener('mouseleave',()=>isDown=false);
-  rail.addEventListener('mouseup',()=>isDown=false);
-  rail.addEventListener('mousemove',e=>{
-    if(!isDown)return; e.preventDefault();
-    const x=e.pageX-rail.offsetLeft;
-    rail.scrollLeft=scrollLeft-(x-startX)*1.5;
+
+/* ── Scroll Reveal ──
+   IntersectionObserver detecta cuando un elemento .reveal
+   entra en el viewport y le agrega la clase .visible */
+const reveals = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible'); // Activa la animación
+      io.unobserve(e.target);            // Deja de observarlo (no se repite)
+    }
+  });
+}, { threshold: .12 }); // Se activa cuando el 12% del elemento es visible
+reveals.forEach(el => io.observe(el));
+
+
+/* ── Drag to scroll en los carriles ──
+   Permite arrastrar las tarjetas con el mouse como en una app nativa */
+document.querySelectorAll('.rail').forEach(rail => {
+  let isDown = false, startX, scrollLeft;
+
+  rail.addEventListener('mousedown', e => {
+    isDown = true;
+    startX = e.pageX - rail.offsetLeft; // Posición del mouse relativa al rail
+    scrollLeft = rail.scrollLeft;        // Posición actual del scroll
+  });
+  rail.addEventListener('mouseleave', () => isDown = false); // Suelta al salir
+  rail.addEventListener('mouseup',    () => isDown = false); // Suelta al soltar click
+
+  rail.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - rail.offsetLeft;
+    // Multiplica por 1.5 para hacer el drag más veloz y responsivo
+    rail.scrollLeft = scrollLeft - (x - startX) * 1.5;
   });
 });
 
-(function(){
-  const canvas=document.getElementById('particles');
-  const ctx=canvas.getContext('2d');
-  let W,H,particles=[];
-  function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
-  resize(); window.addEventListener('resize',resize,{passive:true});
-  function Particle(){
-    this.x=Math.random()*W; this.y=Math.random()*H;
-    this.r=Math.random()*1.2+0.3;
-    this.vx=(Math.random()-.5)*0.3; this.vy=(Math.random()-.5)*0.3;
-    this.alpha=Math.random()*0.4+0.1;
+
+/* ── Partículas animadas ──
+   Dibuja puntos flotantes conectados por líneas en un canvas HTML5 */
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx    = canvas.getContext('2d'); // Contexto 2D para dibujar
+  let W, H, particles = [];
+
+  // Ajusta el canvas al tamaño de la ventana
+  function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // Constructor de cada partícula — posición, velocidad y opacidad aleatorias
+  function Particle() {
+    this.x     = Math.random() * W;
+    this.y     = Math.random() * H;
+    this.r     = Math.random() * 1.2 + 0.3;          // Radio entre 0.3 y 1.5px
+    this.vx    = (Math.random() - .5) * 0.3;          // Velocidad horizontal
+    this.vy    = (Math.random() - .5) * 0.3;          // Velocidad vertical
+    this.alpha = Math.random() * 0.4 + 0.1;           // Opacidad entre 0.1 y 0.5
   }
-  for(let i=0;i<90;i++) particles.push(new Particle());
-  function draw(){
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p=>{
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0)p.x=W; if(p.x>W)p.x=0;
-      if(p.y<0)p.y=H; if(p.y>H)p.y=0;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(0,242,255,${p.alpha})`; ctx.fill();
+
+  // Crea 90 partículas
+  for (let i = 0; i < 90; i++) particles.push(new Particle());
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H); // Limpia el canvas en cada frame
+
+    // Dibuja y mueve cada partícula
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      // Si sale por un lado, reaparece por el otro (efecto infinito)
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0,242,255,${p.alpha})`;
+      ctx.fill();
     });
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x;
-        const dy=particles[i].y-particles[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<100){
+
+    // Conecta partículas cercanas con una línea
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const d  = Math.sqrt(dx * dx + dy * dy); // Distancia entre dos partículas
+
+        if (d < 100) { // Solo conecta si están a menos de 100px
           ctx.beginPath();
-          ctx.moveTo(particles[i].x,particles[i].y);
-          ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.strokeStyle=`rgba(0,242,255,${0.05*(1-d/100)})`;
-          ctx.lineWidth=.5; ctx.stroke();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          // La línea se hace más transparente cuanto más lejos están
+          ctx.strokeStyle = `rgba(0,242,255,${0.05 * (1 - d / 100)})`;
+          ctx.lineWidth = .5;
+          ctx.stroke();
         }
       }
     }
-    requestAnimationFrame(draw);
+    requestAnimationFrame(draw); // Loop continuo ~60fps
   }
   draw();
-})();
+})(); // IIFE: se ejecuta inmediatamente y no contamina el scope global
+
 </script>
 </body>
-       </html>
+</html>
