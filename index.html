@@ -9,9 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-/* ═══════════════════════════════════════
-   VARIABLES & RESET
-═══════════════════════════════════════ */
 :root {
   --c: #00f2ff;
   --c2: #0af;
@@ -33,10 +30,6 @@ body{
   cursor:none;
 }
 ::selection{background:rgba(0,242,255,0.25);color:#fff}
-
-/* ═══════════════════════════════════════
-   CUSTOM CURSOR
-═══════════════════════════════════════ */
 #cursor{
   position:fixed;width:10px;height:10px;
   background:var(--c);border-radius:50%;
@@ -54,43 +47,21 @@ body{
 }
 body:has(a:hover) #cursor{width:18px;height:18px;background:var(--gold)}
 body:has(a:hover) #cursor-ring{width:52px;height:52px;border-color:rgba(240,192,96,0.5)}
-
-/* ═══════════════════════════════════════
-   SCANLINE OVERLAY
-═══════════════════════════════════════ */
 body::before{
   content:'';position:fixed;inset:0;
   background:repeating-linear-gradient(
-    0deg,
-    transparent,transparent 2px,
+    0deg,transparent,transparent 2px,
     rgba(0,0,0,0.04) 2px,rgba(0,0,0,0.04) 4px
   );
   pointer-events:none;z-index:9000;
 }
-
-/* ═══════════════════════════════════════
-   NOISE TEXTURE
-═══════════════════════════════════════ */
 body::after{
   content:'';position:fixed;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   opacity:0.025;pointer-events:none;z-index:9001;
 }
-
-/* ═══════════════════════════════════════
-   PARTICLES CANVAS
-═══════════════════════════════════════ */
 #particles{position:fixed;inset:0;pointer-events:none;z-index:1}
-
-/* ═══════════════════════════════════════
-   TYPOGRAPHY
-═══════════════════════════════════════ */
 .font-display{font-family:'Bebas Neue',sans-serif;letter-spacing:.04em}
-.font-body{font-family:'Outfit',sans-serif}
-
-/* ═══════════════════════════════════════
-   NAVBAR
-═══════════════════════════════════════ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:500;
   padding:16px 24px;
@@ -103,10 +74,7 @@ nav.scrolled{
   -webkit-backdrop-filter:blur(24px);
   border-bottom:1px solid var(--border);
 }
-.nav-logo{
-  display:flex;align-items:center;gap:12px;
-  text-decoration:none;
-}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .nav-logo img{
   width:44px;height:44px;border-radius:50%;
   object-fit:cover;
@@ -115,8 +83,7 @@ nav.scrolled{
 }
 .btn-support{
   display:inline-flex;align-items:center;gap:8px;
-  border:1px solid var(--border);
-  color:var(--c);
+  border:1px solid var(--border);color:var(--c);
   font-family:'Outfit',sans-serif;
   font-size:13px;font-weight:500;
   padding:8px 20px;border-radius:4px;
@@ -130,10 +97,6 @@ nav.scrolled{
   border-color:rgba(0,242,255,0.5);
   box-shadow:0 0 20px rgba(0,242,255,0.15);
 }
-
-/* ═══════════════════════════════════════
-   HERO
-═══════════════════════════════════════ */
 .hero{
   position:relative;min-height:100vh;
   display:flex;align-items:center;justify-content:center;
@@ -146,29 +109,24 @@ nav.scrolled{
     radial-gradient(ellipse 40% 40% at 80% 80%, rgba(0,242,255,0.08) 0%, transparent 60%),
     radial-gradient(ellipse 30% 30% at 20% 60%, rgba(0,100,160,0.12) 0%, transparent 60%);
 }
-/* Cinematic horizontal lines */
 .hero-lines{
   position:absolute;inset:0;
   background:repeating-linear-gradient(
-    90deg,
-    transparent,transparent 120px,
+    90deg,transparent,transparent 120px,
     rgba(0,242,255,0.015) 120px,rgba(0,242,255,0.015) 121px
   );
 }
-/* Big ambient number */
 .hero-ambient{
   position:absolute;
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(200px,35vw,500px);
   color:rgba(0,242,255,0.025);
   right:-2%;top:50%;transform:translateY(-50%);
-  line-height:1;pointer-events:none;
-  user-select:none;
+  line-height:1;pointer-events:none;user-select:none;
 }
 .hero-content{
   position:relative;z-index:10;
-  max-width:900px;padding:0 24px;
-  text-align:left;
+  max-width:900px;padding:0 24px;text-align:left;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:10px;
@@ -177,31 +135,21 @@ nav.scrolled{
   margin-bottom:28px;
   opacity:0;animation:slideRight .8s .2s ease both;
 }
-.hero-eyebrow::before{
-  content:'';width:32px;height:1px;background:var(--c);
-  box-shadow:0 0 8px var(--c);
-}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--c);box-shadow:0 0 8px var(--c)}
 .hero-h1{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(56px,10vw,130px);
-  line-height:.92;
-  color:#fff;
-  margin-bottom:32px;
+  line-height:.92;color:#fff;margin-bottom:32px;
   opacity:0;animation:slideRight .8s .35s ease both;
 }
 .hero-h1 span{
-  color:transparent;
-  -webkit-text-stroke:2px var(--c);
-  text-shadow:0 0 40px rgba(0,242,255,0.4);
-  display:block;
+  color:transparent;-webkit-text-stroke:2px var(--c);
+  text-shadow:0 0 40px rgba(0,242,255,0.4);display:block;
 }
 .hero-sub{
-  font-size:clamp(15px,1.6vw,18px);
-  font-weight:300;
-  color:rgba(200,216,232,0.7);
-  max-width:520px;
-  line-height:1.75;
-  margin-bottom:44px;
+  font-size:clamp(16px,1.7vw,19px);font-weight:400;
+  color:rgba(220,232,245,0.88);
+  max-width:520px;line-height:1.8;margin-bottom:52px;
   opacity:0;animation:slideRight .8s .5s ease both;
 }
 .hero-actions{
@@ -224,39 +172,26 @@ nav.scrolled{
   background:linear-gradient(135deg,rgba(255,255,255,0.25),transparent);
   opacity:0;transition:opacity .2s;
 }
-.btn-primary:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 30px rgba(0,242,255,0.6),0 0 80px rgba(0,242,255,0.25);
-}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,242,255,0.6),0 0 80px rgba(0,242,255,0.25)}
 .btn-primary:hover::before{opacity:1}
 .btn-secondary{
   display:inline-flex;align-items:center;gap:8px;
-  color:rgba(200,216,232,0.7);
-  font-size:13px;font-weight:500;letter-spacing:.08em;
-  text-decoration:none;text-transform:uppercase;
-  transition:color .2s;
+  color:rgba(215,228,240,0.85);
+  font-size:14px;font-weight:500;letter-spacing:.08em;
+  text-decoration:none;text-transform:uppercase;transition:color .2s;
 }
 .btn-secondary:hover{color:#fff}
 .btn-secondary svg{transition:transform .2s}
 .btn-secondary:hover svg{transform:translateX(4px)}
-
-/* Hero stats */
 .hero-stats{
   position:absolute;bottom:40px;left:0;right:0;
   display:flex;justify-content:center;gap:64px;
-  z-index:10;
-  opacity:0;animation:fadeUp .8s .9s ease both;
+  z-index:10;opacity:0;animation:fadeUp .8s .9s ease both;
 }
 .stat-item{text-align:center}
-.stat-num{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:36px;color:#fff;
-  line-height:1;
-}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;line-height:1}
 .stat-num span{color:var(--c)}
-.stat-label{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,216,232,0.4);margin-top:4px}
-
-/* Scroll indicator */
+.stat-label{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:rgba(200,216,232,0.6);margin-top:4px}
 .scroll-ind{
   position:absolute;bottom:40px;right:40px;
   display:flex;align-items:center;gap:8px;
@@ -264,41 +199,20 @@ nav.scrolled{
   color:rgba(200,216,232,0.35);z-index:10;
   opacity:0;animation:fadeUp .8s 1.1s ease both;
 }
-.scroll-ind::after{
-  content:'';width:1px;height:40px;
-  background:linear-gradient(to bottom,rgba(0,242,255,0.6),transparent);
-  display:block;
-}
-
-/* ═══════════════════════════════════════
-   SECTION SHARED
-═══════════════════════════════════════ */
+.scroll-ind::after{content:'';width:1px;height:40px;background:linear-gradient(to bottom,rgba(0,242,255,0.6),transparent);display:block}
 section{position:relative;z-index:10}
 .section-inner{max-width:1200px;margin:0 auto;padding:0 24px}
-.section-header{margin-bottom:48px}
+.section-header{margin-bottom:56px}
 .label{
   display:inline-flex;align-items:center;gap:8px;
   font-size:10px;font-weight:600;letter-spacing:.3em;
-  text-transform:uppercase;color:var(--c);
-  margin-bottom:12px;
+  text-transform:uppercase;color:var(--c);margin-bottom:12px;
 }
 .label::before{content:'';width:20px;height:1px;background:var(--c)}
-.section-title{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(36px,5vw,60px);
-  color:#fff;line-height:.95;
-}
-.section-title em{
-  font-style:normal;
-  color:transparent;
-  -webkit-text-stroke:1px rgba(0,242,255,0.6);
-}
-
-/* ═══════════════════════════════════════
-   RAIL SECTION
-═══════════════════════════════════════ */
-.rails-section{padding:100px 0}
-.rail-block{margin-bottom:60px}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);color:#fff;line-height:.95}
+.section-title em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(0,242,255,0.6)}
+.rails-section{padding:110px 0}
+.rail-block{margin-bottom:72px}
 .rail-header{
   display:flex;align-items:flex-end;justify-content:space-between;
   margin-bottom:20px;padding:0 24px;
@@ -306,64 +220,41 @@ section{position:relative;z-index:10}
 }
 .rail-header .label{margin-bottom:0}
 .rail-scroll-hint{
-  font-size:11px;letter-spacing:.15em;color:rgba(200,216,232,0.3);
-  text-transform:uppercase;
-  display:flex;align-items:center;gap:6px;
+  font-size:12px;letter-spacing:.15em;color:rgba(200,216,232,0.5);
+  text-transform:uppercase;display:flex;align-items:center;gap:6px;
 }
 .rail-scroll-hint svg{opacity:.5}
-
-/* Rail container - full width with left padding */
-.rail-outer{
-  padding-left:24px;
-  /* allow scroll to right edge without padding-right cutoff */
-  overflow:hidden;
-}
+.rail-outer{padding-left:24px;overflow:hidden}
 .rail{
-  display:flex;gap:14px;
-  overflow-x:auto;
-  padding-bottom:16px;
-  padding-right:24px;
+  display:flex;gap:14px;overflow-x:auto;
+  padding-bottom:16px;padding-right:24px;
   scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling:touch;
-  cursor:grab;
+  -webkit-overflow-scrolling:touch;cursor:grab;
 }
 .rail:active{cursor:grabbing}
 .rail::-webkit-scrollbar{height:3px}
 .rail::-webkit-scrollbar-track{background:rgba(255,255,255,0.03);border-radius:2px}
 .rail::-webkit-scrollbar-thumb{background:var(--c);border-radius:2px}
-
-/* Card */
 .rcard{
   flex:0 0 280px;scroll-snap-align:start;
   border-radius:6px;overflow:hidden;
   position:relative;border:1px solid rgba(255,255,255,0.06);
-  transition:transform .35s cubic-bezier(.25,.46,.45,.94),
-             border-color .35s,box-shadow .35s;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94),border-color .35s,box-shadow .35s;
 }
 .rcard:hover{
   transform:scale(1.04) translateY(-6px);
   border-color:rgba(0,242,255,0.3);
   box-shadow:0 20px 40px rgba(0,0,0,0.5),0 0 20px rgba(0,242,255,0.15);
 }
-.rcard img{
-  width:100%;height:175px;object-fit:cover;display:block;
-  transition:transform .5s ease;
-}
+.rcard img{width:100%;height:175px;object-fit:cover;display:block;transition:transform .5s ease}
 .rcard:hover img{transform:scale(1.08)}
 .rcard-body{
   position:absolute;inset:0;
   background:linear-gradient(to top,rgba(6,6,8,0.95) 0%,rgba(6,6,8,0.4) 50%,transparent 100%);
-  display:flex;flex-direction:column;justify-content:flex-end;
-  padding:14px;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:14px;
 }
-.rcard-tag{
-  font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;
-  color:var(--c);margin-bottom:4px;
-}
-.rcard-name{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:20px;color:#fff;line-height:1;
-}
+.rcard-tag{font-size:9px;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--c);margin-bottom:4px}
+.rcard-name{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#fff;line-height:1}
 .rcard-live{
   position:absolute;top:12px;left:12px;
   display:flex;align-items:center;gap:5px;
@@ -371,13 +262,8 @@ section{position:relative;z-index:10}
   background:rgba(255,40,40,0.9);color:#fff;
   padding:3px 8px;border-radius:3px;text-transform:uppercase;
 }
-.rcard-live::before{
-  content:'';width:5px;height:5px;border-radius:50%;background:#fff;
-  animation:livePulse 1.2s ease infinite;
-}
-@keyframes livePulse{
-  0%,100%{opacity:1}50%{opacity:.3}
-}
+.rcard-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;animation:livePulse 1.2s ease infinite}
+@keyframes livePulse{0%,100%{opacity:1}50%{opacity:.3}}
 .rcard-hd{
   position:absolute;top:12px;right:12px;
   font-size:9px;font-weight:700;letter-spacing:.1em;
@@ -385,22 +271,14 @@ section{position:relative;z-index:10}
   border:1px solid rgba(0,242,255,0.3);
   padding:3px 7px;border-radius:3px;
 }
-
-/* ═══════════════════════════════════════
-   SERVICES
-═══════════════════════════════════════ */
-.services-section{padding:100px 0;border-top:1px solid rgba(255,255,255,0.04)}
+.services-section{padding:120px 0;border-top:1px solid rgba(255,255,255,0.04)}
 .services-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:2px;
   border:2px solid rgba(0,242,255,0.08);border-radius:8px;overflow:hidden;
 }
 .svc-card{
-  padding:44px 36px;
-  background:rgba(255,255,255,0.02);
-  border:none;
-  transition:background .3s;
-  position:relative;
-  overflow:hidden;
+  padding:52px 40px;background:rgba(255,255,255,0.02);
+  border:none;transition:background .3s;position:relative;overflow:hidden;
 }
 .svc-card::before{
   content:'';position:absolute;bottom:0;left:0;right:0;
@@ -413,171 +291,77 @@ section{position:relative;z-index:10}
 .svc-icon{
   width:52px;height:52px;margin-bottom:24px;
   border:1px solid var(--border);border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--c);
+  display:flex;align-items:center;justify-content:center;color:var(--c);
   transition:box-shadow .3s,border-color .3s;
 }
-.svc-card:hover .svc-icon{
-  border-color:rgba(0,242,255,0.4);
-  box-shadow:0 0 20px rgba(0,242,255,0.2);
-}
-.svc-num{
-  position:absolute;top:20px;right:24px;
-  font-family:'Bebas Neue',sans-serif;font-size:48px;
-  color:rgba(0,242,255,0.06);line-height:1;
-}
-.svc-title{
-  font-family:'Bebas Neue',sans-serif;font-size:26px;
-  color:#fff;margin-bottom:10px;
-}
-.svc-desc{font-size:14px;color:rgba(200,216,232,0.55);line-height:1.7}
-
-/* ═══════════════════════════════════════
-   BENEFITS BENTO
-═══════════════════════════════════════ */
-.benefits-section{padding:100px 0}
-.bento{
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  grid-template-rows:auto;
-  gap:12px;
-}
+.svc-card:hover .svc-icon{border-color:rgba(0,242,255,0.4);box-shadow:0 0 20px rgba(0,242,255,0.2)}
+.svc-num{position:absolute;top:20px;right:24px;font-family:'Bebas Neue',sans-serif;font-size:48px;color:rgba(0,242,255,0.06);line-height:1}
+.svc-title{font-family:'Bebas Neue',sans-serif;font-size:28px;color:#fff;margin-bottom:14px}
+.svc-desc{font-size:15px;color:rgba(215,228,240,0.78);line-height:1.75}
+.benefits-section{padding:120px 0}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:auto;gap:12px}
 .bento-card{
   background:rgba(255,255,255,0.025);
   border:1px solid rgba(255,255,255,0.06);
-  border-radius:8px;padding:32px;
+  border-radius:8px;padding:36px 36px 40px;
   position:relative;overflow:hidden;
   transition:border-color .3s,background .3s,transform .3s;
 }
-.bento-card:hover{
-  border-color:rgba(0,242,255,0.25);
-  background:rgba(0,242,255,0.03);
-  transform:translateY(-4px);
-}
-.bento-card .bc-icon{
-  color:var(--c);margin-bottom:20px;
-}
-.bento-card .bc-num{
-  position:absolute;bottom:-10px;right:16px;
-  font-family:'Bebas Neue',sans-serif;font-size:80px;
-  color:rgba(0,242,255,0.04);line-height:1;pointer-events:none;
-}
-.bc-title{
-  font-family:'Bebas Neue',sans-serif;font-size:22px;
-  color:#fff;margin-bottom:8px;
-}
-.bc-desc{font-size:13px;color:rgba(200,216,232,0.5);line-height:1.65}
-
-/* Bento layout */
+.bento-card:hover{border-color:rgba(0,242,255,0.25);background:rgba(0,242,255,0.03);transform:translateY(-4px)}
+.bento-card .bc-icon{color:var(--c);margin-bottom:24px}
+.bento-card .bc-num{position:absolute;bottom:-10px;right:16px;font-family:'Bebas Neue',sans-serif;font-size:80px;color:rgba(0,242,255,0.04);line-height:1;pointer-events:none}
+.bc-title{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;margin-bottom:12px}
+.bc-desc{font-size:15px;color:rgba(215,228,240,0.78);line-height:1.72;font-weight:400}
 .b1{grid-column:span 6}
 .b2{grid-column:span 6}
 .b3{grid-column:span 4}
 .b4{grid-column:span 4}
 .b5{grid-column:span 4}
-
-/* ═══════════════════════════════════════
-   STEPS — CINEMATIC TIMELINE
-═══════════════════════════════════════ */
-.steps-section{
-  padding:100px 0;
-  border-top:1px solid rgba(255,255,255,0.04);
-  overflow:hidden;
-}
-.steps-timeline{
-  display:grid;grid-template-columns:1fr 1fr 1fr;
-  position:relative;gap:0;
-}
+.steps-section{padding:110px 0;border-top:1px solid rgba(255,255,255,0.04);overflow:hidden}
+.steps-timeline{display:grid;grid-template-columns:1fr 1fr 1fr;position:relative;gap:0}
 .steps-timeline::before{
-  content:'';
-  position:absolute;
-  top:42px;left:calc(16.666% + 20px);right:calc(16.666% + 20px);
-  height:1px;
-  background:linear-gradient(90deg,var(--c),rgba(0,242,255,0.2),var(--c));
-  z-index:0;
+  content:'';position:absolute;
+  top:45px;left:calc(16.666% + 20px);right:calc(16.666% + 20px);
+  height:1px;background:linear-gradient(90deg,var(--c),rgba(0,242,255,0.2),var(--c));z-index:0;
 }
-.step{
-  text-align:center;padding:0 24px;position:relative;z-index:1;
-}
+.step{text-align:center;padding:0 24px;position:relative;z-index:1}
 .step-circle{
-  width:84px;height:84px;border-radius:50%;
-  background:var(--bg);
-  border:1px solid var(--border);
+  width:90px;height:90px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--border);
   display:flex;align-items:center;justify-content:center;
-  margin:0 auto 28px;
-  position:relative;
+  margin:0 auto 32px;position:relative;
   transition:border-color .3s,box-shadow .3s;
 }
-.step:hover .step-circle{
-  border-color:rgba(0,242,255,0.5);
-  box-shadow:0 0 30px rgba(0,242,255,0.2);
-}
-.step-circle::before{
-  content:'';position:absolute;inset:-1px;border-radius:50%;
-  background:conic-gradient(var(--c) 0deg,transparent 120deg);
-  opacity:.4;z-index:-1;
-}
-.step-num{
-  font-family:'Bebas Neue',sans-serif;font-size:11px;
-  letter-spacing:.3em;color:var(--c);margin-bottom:6px;
-}
-.step-title{
-  font-family:'Bebas Neue',sans-serif;font-size:24px;
-  color:#fff;margin-bottom:10px;
-}
-.step-desc{font-size:13px;color:rgba(200,216,232,0.5);line-height:1.65}
-
-/* ═══════════════════════════════════════
-   REQUISITOS
-═══════════════════════════════════════ */
-.req-section{padding:60px 0}
+.step:hover .step-circle{border-color:rgba(0,242,255,0.5);box-shadow:0 0 30px rgba(0,242,255,0.2)}
+.step-circle::before{content:'';position:absolute;inset:-1px;border-radius:50%;background:conic-gradient(var(--c) 0deg,transparent 120deg);opacity:.4;z-index:-1}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:.3em;color:var(--c);margin-bottom:8px}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;margin-bottom:12px}
+.step-desc{font-size:15px;color:rgba(215,228,240,0.75);line-height:1.72;max-width:220px;margin:0 auto}
+.req-section{padding:80px 0}
 .req-bar{
-  border:1px solid var(--border);
-  border-radius:6px;
-  padding:36px 40px;
+  border:1px solid var(--border);border-radius:6px;padding:44px 48px;
   background:rgba(0,242,255,0.02);
   display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:24px;
-  position:relative;overflow:hidden;
+  flex-wrap:wrap;gap:28px;position:relative;overflow:hidden;
 }
-.req-bar::before{
-  content:'';position:absolute;top:0;left:0;bottom:0;width:3px;
-  background:var(--c);box-shadow:0 0 12px var(--c);
-}
-.req-bar-left h3{
-  font-family:'Bebas Neue',sans-serif;font-size:24px;
-  color:#fff;margin-bottom:4px;
-}
-.req-bar-left p{font-size:13px;color:rgba(200,216,232,0.45)}
-.req-items{display:flex;flex-wrap:wrap;gap:24px}
-.req-item{
-  display:flex;align-items:center;gap:10px;
-  font-size:13px;color:rgba(200,216,232,0.7);
-}
+.req-bar::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:var(--c);box-shadow:0 0 12px var(--c)}
+.req-bar-left h3{font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;margin-bottom:4px}
+.req-bar-left p{font-size:14px;color:rgba(215,228,240,0.6)}
+.req-items{display:flex;flex-wrap:wrap;gap:28px}
+.req-item{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:rgba(220,232,245,0.85)}
 .req-item svg{color:var(--c);flex-shrink:0}
-
-/* ═══════════════════════════════════════
-   CTA FINAL
-═══════════════════════════════════════ */
-.cta-section{
-  padding:120px 24px;
-  position:relative;overflow:hidden;
-  text-align:center;
-}
+.cta-section{padding:120px 24px;position:relative;overflow:hidden;text-align:center}
 .cta-bg{
   position:absolute;inset:0;
   background:
     radial-gradient(ellipse 70% 70% at 50% 50%,rgba(0,80,120,0.3) 0%,transparent 70%),
     radial-gradient(ellipse 30% 30% at 20% 80%,rgba(0,242,255,0.08) 0%,transparent 60%);
 }
-/* Large ghost text */
 .cta-ghost{
   position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(100px,20vw,280px);
-  color:transparent;
-  -webkit-text-stroke:1px rgba(0,242,255,0.04);
-  white-space:nowrap;pointer-events:none;
-  user-select:none;line-height:1;
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,20vw,280px);
+  color:transparent;-webkit-text-stroke:1px rgba(0,242,255,0.04);
+  white-space:nowrap;pointer-events:none;user-select:none;line-height:1;
 }
 .cta-content{position:relative;z-index:2}
 .cta-label{
@@ -585,93 +369,38 @@ section{position:relative;z-index:10}
   font-size:10px;font-weight:600;letter-spacing:.3em;
   text-transform:uppercase;color:var(--c);margin-bottom:24px;
 }
-.cta-label::before,.cta-label::after{
-  content:'';width:32px;height:1px;background:var(--c);
-}
-.cta-h2{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(50px,8vw,100px);
-  color:#fff;line-height:.9;margin-bottom:24px;
-}
-.cta-h2 span{
-  color:transparent;
-  -webkit-text-stroke:2px var(--c);
-  text-shadow:0 0 40px rgba(0,242,255,0.3);
-  display:block;
-}
-.cta-sub{
-  font-size:16px;color:rgba(200,216,232,0.55);
-  max-width:440px;margin:0 auto 44px;line-height:1.7;
-}
-
-/* ═══════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════ */
-footer{
-  border-top:1px solid rgba(255,255,255,0.05);
-  padding:32px 24px;
-}
-.footer-inner{
-  max-width:1200px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:16px;
-}
+.cta-label::before,.cta-label::after{content:'';width:32px;height:1px;background:var(--c)}
+.cta-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(50px,8vw,100px);color:#fff;line-height:.9;margin-bottom:24px}
+.cta-h2 span{color:transparent;-webkit-text-stroke:2px var(--c);text-shadow:0 0 40px rgba(0,242,255,0.3);display:block}
+.cta-sub{font-size:17px;color:rgba(215,228,240,0.75);max-width:460px;margin:0 auto 52px;line-height:1.75;font-weight:400}
+footer{border-top:1px solid rgba(255,255,255,0.05);padding:32px 24px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
 .footer-logo{display:flex;align-items:center;gap:10px}
 .footer-logo img{width:34px;height:34px;border-radius:50%;object-fit:cover;opacity:.8}
-.footer-logo span{
-  font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;
-  letter-spacing:.1em;
-}
-footer p{font-size:12px;color:rgba(200,216,232,0.3);letter-spacing:.04em}
-footer a{color:var(--c);font-size:12px;text-decoration:none;letter-spacing:.08em;
-  transition:opacity .2s}
+.footer-logo span{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;letter-spacing:.1em}
+footer p{font-size:13px;color:rgba(200,216,232,0.45);letter-spacing:.04em}
+footer a{color:var(--c);font-size:12px;text-decoration:none;letter-spacing:.08em;transition:opacity .2s}
 footer a:hover{opacity:.7}
-
-/* ═══════════════════════════════════════
-   FLOATING WA BUTTON
-═══════════════════════════════════════ */
 .wa-float{
   position:fixed;bottom:28px;right:28px;z-index:500;
-  width:56px;height:56px;border-radius:50%;
-  background:var(--c);
+  width:56px;height:56px;border-radius:50%;background:var(--c);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 0 24px rgba(0,242,255,0.6),0 0 60px rgba(0,242,255,0.2);
-  text-decoration:none;
-  animation:waFloat 3s ease infinite;
-  transition:transform .2s;
+  text-decoration:none;animation:waFloat 3s ease infinite;transition:transform .2s;
 }
 .wa-float:hover{transform:scale(1.1)}
 @keyframes waFloat{
   0%,100%{box-shadow:0 0 24px rgba(0,242,255,0.6),0 0 60px rgba(0,242,255,0.2)}
   50%{box-shadow:0 0 36px rgba(0,242,255,0.9),0 0 80px rgba(0,242,255,0.35)}
 }
-
-/* ═══════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════ */
-@keyframes slideRight{
-  from{opacity:0;transform:translateX(-30px)}
-  to{opacity:1;transform:translateX(0)}
-}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
-}
-
-/* Scroll reveal */
-.reveal{
-  opacity:0;transform:translateY(32px);
-  transition:opacity .7s ease,transform .7s ease;
-}
+@keyframes slideRight{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-d1{transition-delay:.1s}
 .reveal-d2{transition-delay:.2s}
 .reveal-d3{transition-delay:.3s}
 .reveal-d4{transition-delay:.4s}
-
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
 @media(max-width:900px){
   body{cursor:auto}
   #cursor,#cursor-ring{display:none}
@@ -694,17 +423,13 @@ footer a:hover{opacity:.7}
 </head>
 <body>
 
-<!-- Custom Cursor -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
-
-<!-- Particles Canvas -->
 <canvas id="particles"></canvas>
 
-<!-- ═══════════════ NAVBAR ═══════════════ -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <img src="/mnt/user-data/uploads/1000356763.jpg" alt="Kleiin MW"/>
+    <img src="logo.jpg" alt="Kleiin MW"/>
   </a>
   <a href="https://wa.me/543794082942?text=Necesito%20soporte" target="_blank" rel="noopener" class="btn-support">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
@@ -712,24 +437,19 @@ footer a:hover{opacity:.7}
   </a>
 </nav>
 
-<!-- ═══════════════ HERO ═══════════════ -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-lines"></div>
   <div class="hero-ambient">4K</div>
-
   <div class="hero-content">
     <div class="hero-eyebrow">Corrientes Capital · Disponible ahora</div>
     <h1 class="hero-h1">
       Todo el<br/>entretenimiento
       <span>en un solo lugar</span>
     </h1>
-    <p class="hero-sub">
-      Accedé al mejor contenido premium, deportes en vivo y series en alta definición desde cualquier dispositivo.
-    </p>
+    <p class="hero-sub">Accedé al mejor contenido premium, deportes en vivo y series en alta definición desde cualquier dispositivo.</p>
     <div class="hero-actions">
       <a href="https://wa.me/543794082942?text=Quiero%20contratar%20el%20servicio%20premium" target="_blank" rel="noopener" class="btn-primary">
-        <!-- WhatsApp icon -->
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.117 1.533 5.845L.057 23.01a.75.75 0 00.932.932l5.165-1.476A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.732 9.732 0 01-4.97-1.366l-.356-.21-3.685 1.052 1.053-3.686-.21-.356A9.733 9.733 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
         Contactar por WhatsApp
       </a>
@@ -739,173 +459,106 @@ footer a:hover{opacity:.7}
       </a>
     </div>
   </div>
-
   <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-num">24<span>/7</span></div>
-      <div class="stat-label">Soporte</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><span>+</span>10K</div>
-      <div class="stat-label">Canales</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">4<span>K</span></div>
-      <div class="stat-label">Calidad</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num"><span>∞</span></div>
-      <div class="stat-label">Contenido</div>
-    </div>
+    <div class="stat-item"><div class="stat-num">24<span>/7</span></div><div class="stat-label">Soporte</div></div>
+    <div class="stat-item"><div class="stat-num"><span>+</span>10K</div><div class="stat-label">Canales</div></div>
+    <div class="stat-item"><div class="stat-num">4<span>K</span></div><div class="stat-label">Calidad</div></div>
+    <div class="stat-item"><div class="stat-num"><span>∞</span></div><div class="stat-label">Contenido</div></div>
   </div>
-
   <div class="scroll-ind">Scroll</div>
 </section>
 
-<!-- ═══════════════ RAILS ═══════════════ -->
 <section class="rails-section">
-
-  <!-- Rail 1: Deportes -->
   <div class="rail-block">
     <div class="rail-header">
       <div>
         <div class="label">En vivo ahora</div>
         <div class="section-title">Deportes <em>en Vivo</em></div>
       </div>
-      <div class="rail-scroll-hint">
-        Deslizá
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
+      <div class="rail-scroll-hint">Deslizá <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
     <div class="rail-outer">
       <div class="rail" id="rail1">
-        <!-- Card -->
         <div class="rcard">
-          <img src="https://placehold.co/280x175/0a1a2a/00f2ff?text=⚽" alt="Fútbol"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Liga Premier</div>
-            <div class="rcard-name">Fútbol</div>
-          </div>
-          <div class="rcard-live">VIVO</div>
+          <img src="deportes/futbol.png" alt="Fútbol"/>
+          <div class="rcard-body"><div class="rcard-tag">Liga Premier</div><div class="rcard-name">Fútbol</div></div>
+          <div class="rcard-live">VIVO</div><div class="rcard-hd">HD</div>
+        </div>
+        <div class="rcard">
+          <img src="deportes/carreras.png" alt="Carreras"/>
+          <div class="rcard-body"><div class="rcard-tag">Gran Premio</div><div class="rcard-name">Carreras F1</div></div>
+          <div class="rcard-live">VIVO</div><div class="rcard-hd">4K</div>
+        </div>
+        <div class="rcard">
+          <img src="deportes/basquet.png" alt="Básquet"/>
+          <div class="rcard-body"><div class="rcard-tag">NBA · Finals</div><div class="rcard-name">Básquet</div></div>
+          <div class="rcard-live">VIVO</div><div class="rcard-hd">HD</div>
+        </div>
+        <div class="rcard">
+          <img src="deportes/tenis.png" alt="Tenis"/>
+          <div class="rcard-body"><div class="rcard-tag">Grand Slam</div><div class="rcard-name">Tenis</div></div>
           <div class="rcard-hd">HD</div>
         </div>
         <div class="rcard">
-          <img src="https://placehold.co/280x175/0d1020/00aaff?text=🏎️" alt="Fórmula"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Gran Premio</div>
-            <div class="rcard-name">Carreras F1</div>
-          </div>
-          <div class="rcard-live">VIVO</div>
-          <div class="rcard-hd">4K</div>
+          <img src="deportes/boxeo.png" alt="Boxeo"/>
+          <div class="rcard-body"><div class="rcard-tag">Pelea Estelar</div><div class="rcard-name">Boxeo</div></div>
+          <div class="rcard-live">VIVO</div><div class="rcard-hd">4K</div>
         </div>
         <div class="rcard">
-          <img src="https://placehold.co/280x175/0a1a2a/00f2ff?text=🏀" alt="Básquet"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">NBA · Finals</div>
-            <div class="rcard-name">Básquet</div>
-          </div>
-          <div class="rcard-live">VIVO</div>
-          <div class="rcard-hd">HD</div>
-        </div>
-        <div class="rcard">
-          <img src="https://placehold.co/280x175/0d1020/00aaff?text=🎾" alt="Tenis"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Grand Slam</div>
-            <div class="rcard-name">Tenis</div>
-          </div>
-          <div class="rcard-hd">HD</div>
-        </div>
-        <div class="rcard">
-          <img src="https://placehold.co/280x175/0a1a2a/00f2ff?text=🥊" alt="Boxeo"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Pelea Estelar</div>
-            <div class="rcard-name">Boxeo</div>
-          </div>
-          <div class="rcard-live">VIVO</div>
-          <div class="rcard-hd">4K</div>
-        </div>
-        <div class="rcard">
-          <img src="https://placehold.co/280x175/0d1020/00aaff?text=🏊" alt="Más"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Y mucho más</div>
-            <div class="rcard-name">+100 Deportes</div>
-          </div>
+          <img src="deportes/mas-deportes.png" alt="Más deportes"/>
+          <div class="rcard-body"><div class="rcard-tag">Y mucho más</div><div class="rcard-name">+100 Deportes</div></div>
           <div class="rcard-hd">HD</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Rail 2: Películas -->
   <div class="rail-block">
     <div class="rail-header">
       <div>
         <div class="label">Catálogo Premium</div>
         <div class="section-title">Películas <em>&amp; Series</em></div>
       </div>
-      <div class="rail-scroll-hint">
-        Deslizá
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </div>
+      <div class="rail-scroll-hint">Deslizá <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
     </div>
     <div class="rail-outer">
       <div class="rail" id="rail2">
         <div class="rcard">
-          <img src="https://placehold.co/280x175/1a0a20/cc44ff?text=💥" alt="Acción"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Blockbuster</div>
-            <div class="rcard-name">Acción</div>
-          </div>
+          <img src="peliculas/accion.png" alt="Acción"/>
+          <div class="rcard-body"><div class="rcard-tag">Blockbuster</div><div class="rcard-name">Acción</div></div>
           <div class="rcard-hd">4K</div>
         </div>
         <div class="rcard">
-          <img src="https://placehold.co/280x175/200a10/ff5566?text=🎭" alt="Drama"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Premiada</div>
-            <div class="rcard-name">Drama</div>
-          </div>
+          <img src="peliculas/drama.png" alt="Drama"/>
+          <div class="rcard-body"><div class="rcard-tag">Premiada</div><div class="rcard-name">Drama</div></div>
           <div class="rcard-hd">HD</div>
         </div>
         <div class="rcard">
-          <img src="https://placehold.co/280x175/1a0a20/cc44ff?text=🆕" alt="Estrenos"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Recién salido</div>
-            <div class="rcard-name">Estrenos</div>
-          </div>
+          <img src="peliculas/estrenos.png" alt="Estrenos"/>
+          <div class="rcard-body"><div class="rcard-tag">Recién salido</div><div class="rcard-name">Estrenos</div></div>
           <div class="rcard-live" style="background:rgba(240,192,96,0.9);color:#000">NUEVO</div>
           <div class="rcard-hd">4K</div>
         </div>
         <div class="rcard">
-          <img src="https://placehold.co/280x175/200a10/ff5566?text=😂" alt="Comedia"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Feel Good</div>
-            <div class="rcard-name">Comedia</div>
-          </div>
+          <img src="peliculas/comedia.png" alt="Comedia"/>
+          <div class="rcard-body"><div class="rcard-tag">Feel Good</div><div class="rcard-name">Comedia</div></div>
           <div class="rcard-hd">HD</div>
         </div>
         <div class="rcard">
-          <img src="https://placehold.co/280x175/1a0a20/cc44ff?text=🚀" alt="Sci-Fi"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Ciencia Ficción</div>
-            <div class="rcard-name">Sci-Fi</div>
-          </div>
+          <img src="peliculas/scifi.png" alt="Sci-Fi"/>
+          <div class="rcard-body"><div class="rcard-tag">Ciencia Ficción</div><div class="rcard-name">Sci-Fi</div></div>
           <div class="rcard-hd">4K</div>
         </div>
         <div class="rcard">
-          <img src="https://placehold.co/280x175/200a10/ff5566?text=🔪" alt="Thriller"/>
-          <div class="rcard-body">
-            <div class="rcard-tag">Suspenso</div>
-            <div class="rcard-name">Thriller</div>
-          </div>
+          <img src="peliculas/thriller.png" alt="Thriller"/>
+          <div class="rcard-body"><div class="rcard-tag">Suspenso</div><div class="rcard-name">Thriller</div></div>
           <div class="rcard-hd">HD</div>
         </div>
       </div>
     </div>
   </div>
-
 </section>
 
-<!-- ═══════════════ SERVICIOS ═══════════════ -->
 <section id="servicios" class="services-section">
   <div class="section-inner">
     <div class="section-header reveal">
@@ -941,7 +594,6 @@ footer a:hover{opacity:.7}
   </div>
 </section>
 
-<!-- ═══════════════ BENEFICIOS ═══════════════ -->
 <section class="benefits-section">
   <div class="section-inner">
     <div class="section-header reveal">
@@ -949,56 +601,40 @@ footer a:hover{opacity:.7}
       <div class="section-title">Ventajas <em>Reales</em></div>
     </div>
     <div class="bento">
-      <!-- b1 -->
       <div class="bento-card b1 reveal reveal-d1">
-        <div class="bc-icon">
-          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
-        </div>
+        <div class="bc-icon"><svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg></div>
         <div class="bc-title">Instalación Inmediata</div>
         <div class="bc-desc">Sin esperas. Activamos el servicio en cuestión de minutos desde que nos contactás. Sin técnicos, sin visitas, sin complicaciones.</div>
         <div class="bc-num">01</div>
       </div>
-      <!-- b2 -->
       <div class="bento-card b2 reveal reveal-d2">
-        <div class="bc-icon">
-          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-        </div>
+        <div class="bc-icon"><svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg></div>
         <div class="bc-title">Sin Contratos Largos</div>
         <div class="bc-desc">Libertad total. Pagás por el período que querés. Sin permanencia mínima, sin letras chicas, sin ataduras.</div>
         <div class="bc-num">02</div>
       </div>
-      <!-- b3 -->
       <div class="bento-card b3 reveal reveal-d1">
-        <div class="bc-icon">
-          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/></svg>
-        </div>
+        <div class="bc-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/></svg></div>
         <div class="bc-title">Config. Personalizada</div>
         <div class="bc-desc">Adaptamos cada detalle a tu dispositivo y preferencias.</div>
         <div class="bc-num">03</div>
       </div>
-      <!-- b4 -->
       <div class="bento-card b4 reveal reveal-d2">
-        <div class="bc-icon">
-          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg>
-        </div>
+        <div class="bc-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/></svg></div>
         <div class="bc-title">Soporte 24/7</div>
         <div class="bc-desc">Disponibles a cualquier hora para resolver cualquier inconveniente al instante.</div>
         <div class="bc-num">04</div>
       </div>
-      <!-- b5 -->
       <div class="bento-card b5 reveal reveal-d3" style="background:rgba(0,242,255,0.04);border-color:rgba(0,242,255,0.15)">
-        <div class="bc-icon" style="color:var(--gold)">
-          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
-        </div>
+        <div class="bc-icon" style="color:var(--gold)"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg></div>
         <div class="bc-title" style="color:var(--gold)">Calidad Premium</div>
-        <div class="bc-desc">HD y 4K garantizados con transmisión estable y estable. La mejor experiencia de visualización en cada pantalla.</div>
+        <div class="bc-desc">HD y 4K garantizados con transmisión estable. La mejor experiencia de visualización en cada pantalla.</div>
         <div class="bc-num" style="color:rgba(240,192,96,0.06)">★</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ PASOS ═══════════════ -->
 <section class="steps-section">
   <div class="section-inner">
     <div class="section-header reveal" style="text-align:center">
@@ -1007,25 +643,19 @@ footer a:hover{opacity:.7}
     </div>
     <div class="steps-timeline">
       <div class="step reveal reveal-d1">
-        <div class="step-circle">
-          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg>
-        </div>
+        <div class="step-circle"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg></div>
         <div class="step-num">PASO 01</div>
         <div class="step-title">Contactanos</div>
         <div class="step-desc">Escribinos por WhatsApp, elegí tu plan y te asesoramos sin compromiso.</div>
       </div>
       <div class="step reveal reveal-d2">
-        <div class="step-circle">
-          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
+        <div class="step-circle"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75l3 3m0 0l3-3m-3 3v-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
         <div class="step-num">PASO 02</div>
         <div class="step-title">Instalamos</div>
         <div class="step-desc">Configuramos el servicio en tu dispositivo de forma remota e inmediata.</div>
       </div>
       <div class="step reveal reveal-d3">
-        <div class="step-circle">
-          <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/></svg>
-        </div>
+        <div class="step-circle"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"/></svg></div>
         <div class="step-num">PASO 03</div>
         <div class="step-title">Disfrutás</div>
         <div class="step-desc">Relajate y accedé a todo el contenido premium sin límites desde cualquier pantalla.</div>
@@ -1034,7 +664,6 @@ footer a:hover{opacity:.7}
   </div>
 </section>
 
-<!-- ═══════════════ REQUISITOS ═══════════════ -->
 <section class="req-section">
   <div class="section-inner">
     <div class="req-bar reveal">
@@ -1060,16 +689,12 @@ footer a:hover{opacity:.7}
   </div>
 </section>
 
-<!-- ═══════════════ CTA FINAL ═══════════════ -->
 <section class="cta-section">
   <div class="cta-bg"></div>
   <div class="cta-ghost">HOY</div>
   <div class="cta-content reveal">
     <div class="cta-label">Sin excusas</div>
-    <h2 class="cta-h2">
-      Empezá a disfrutar
-      <span>hoy mismo</span>
-    </h2>
+    <h2 class="cta-h2">Empezá a disfrutar<span>hoy mismo</span></h2>
     <p class="cta-sub">Escribinos y en minutos tenés el mejor entretenimiento en tu dispositivo, sin complicaciones.</p>
     <a href="https://wa.me/543794082942?text=Hola%2C%20quiero%20contratar%20el%20servicio%20premium" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.117 1.533 5.845L.057 23.01a.75.75 0 00.932.932l5.165-1.476A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.732 9.732 0 01-4.97-1.366l-.356-.21-3.685 1.052 1.053-3.686-.21-.356A9.733 9.733 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
@@ -1078,11 +703,10 @@ footer a:hover{opacity:.7}
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">
-      <img src="/mnt/user-data/uploads/1000356763.jpg" alt="Kleiin MW"/>
+      <img src="logo.jpg" alt="Kleiin MW"/>
       <span>KLEIIN MW</span>
     </div>
     <p>© 2025 Kleiin MW · Cybersecurity & Web Development · Corrientes, Argentina</p>
@@ -1090,14 +714,11 @@ footer a:hover{opacity:.7}
   </div>
 </footer>
 
-<!-- Floating WhatsApp -->
 <a href="https://wa.me/543794082942?text=Hola%2C%20quiero%20informaci%C3%B3n" target="_blank" rel="noopener" class="wa-float" aria-label="WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="black"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.557 4.117 1.533 5.845L.057 23.01a.75.75 0 00.932.932l5.165-1.476A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.732 9.732 0 01-4.97-1.366l-.356-.21-3.685 1.052 1.053-3.686-.21-.356A9.733 9.733 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
 </a>
 
-<!-- ═══════════════ SCRIPTS ═══════════════ -->
 <script>
-/* ── Custom Cursor ── */
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
@@ -1112,20 +733,17 @@ function animRing(){
 }
 animRing();
 
-/* ── Navbar scroll ── */
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>{
   navbar.classList.toggle('scrolled',window.scrollY>60);
-},{ passive:true });
+},{passive:true});
 
-/* ── Scroll Reveal ── */
 const reveals=document.querySelectorAll('.reveal');
 const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
 },{threshold:.12});
 reveals.forEach(el=>io.observe(el));
 
-/* ── Drag-to-scroll rails ── */
 document.querySelectorAll('.rail').forEach(rail=>{
   let isDown=false,startX,scrollLeft;
   rail.addEventListener('mousedown',e=>{isDown=true;startX=e.pageX-rail.offsetLeft;scrollLeft=rail.scrollLeft});
@@ -1138,36 +756,28 @@ document.querySelectorAll('.rail').forEach(rail=>{
   });
 });
 
-/* ── Particles ── */
 (function(){
   const canvas=document.getElementById('particles');
   const ctx=canvas.getContext('2d');
   let W,H,particles=[];
   function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight}
   resize(); window.addEventListener('resize',resize,{passive:true});
-
   function Particle(){
-    this.x=Math.random()*W;
-    this.y=Math.random()*H;
+    this.x=Math.random()*W; this.y=Math.random()*H;
     this.r=Math.random()*1.2+0.3;
-    this.vx=(Math.random()-.5)*0.3;
-    this.vy=(Math.random()-.5)*0.3;
+    this.vx=(Math.random()-.5)*0.3; this.vy=(Math.random()-.5)*0.3;
     this.alpha=Math.random()*0.4+0.1;
   }
   for(let i=0;i<90;i++) particles.push(new Particle());
-
   function draw(){
     ctx.clearRect(0,0,W,H);
     particles.forEach(p=>{
       p.x+=p.vx; p.y+=p.vy;
       if(p.x<0)p.x=W; if(p.x>W)p.x=0;
       if(p.y<0)p.y=H; if(p.y>H)p.y=0;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(0,242,255,${p.alpha})`;
-      ctx.fill();
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(0,242,255,${p.alpha})`; ctx.fill();
     });
-    // Connect nearby
     for(let i=0;i<particles.length;i++){
       for(let j=i+1;j<particles.length;j++){
         const dx=particles[i].x-particles[j].x;
@@ -1178,8 +788,7 @@ document.querySelectorAll('.rail').forEach(rail=>{
           ctx.moveTo(particles[i].x,particles[i].y);
           ctx.lineTo(particles[j].x,particles[j].y);
           ctx.strokeStyle=`rgba(0,242,255,${0.05*(1-d/100)})`;
-          ctx.lineWidth=.5;
-          ctx.stroke();
+          ctx.lineWidth=.5; ctx.stroke();
         }
       }
     }
@@ -1189,4 +798,4 @@ document.querySelectorAll('.rail').forEach(rail=>{
 })();
 </script>
 </body>
-</html>
+       </html>
