@@ -3,160 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kleiin MW | Instalación de Entretenimiento en Corrientes</title>
+    <title>Kleiin MW | Premium Streaming Corrientes</title>
     <style>
-        /* Variables de color para fácil personalización */
         :root {
             --turquesa: #00ced1;
             --naranja: #ff8c00;
-            --oscuro: #0f172a;
+            --oscuro: #070b14;
             --blanco: #ffffff;
-            --gris-suave: #f8fafc;
+            --gradiente: linear-gradient(135deg, var(--turquesa), var(--naranja));
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 5px var(--turquesa); }
+            50% { box-shadow: 0 0 15px var(--turquesa); }
+            100% { box-shadow: 0 0 5px var(--turquesa); }
         }
 
         * {
             margin: 0;
             padding: 0;
-            box-box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
             background-color: var(--oscuro);
             color: var(--blanco);
-            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* Encabezado y Logo */
         header {
-            padding: 20px;
+            padding: 30px;
             text-align: center;
-            border-bottom: 2px solid var(--naranja);
-            background: rgba(15, 23, 42, 0.9);
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .logo-container img {
-            max-width: 150px;
-            height: auto;
-            border-radius: 8px;
+            max-width: 180px;
+            border-radius: 12px;
+            border: 2px solid var(--turquesa);
+            padding: 5px;
         }
 
-        /* Sección Hero / Introducción */
         .hero {
-            padding: 40px 20px;
             text-align: center;
-            background: linear-gradient(180deg, var(--oscuro) 0%, #1a365d 100%);
+            padding: 20px;
+            animation: fadeInUp 1s ease-out;
         }
 
         .hero h1 {
-            color: var(--turquesa);
-            font-size: 2.5rem;
+            font-size: 3rem;
+            background: var(--gradiente);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
 
-        .hero p {
-            color: var(--blanco);
-            max-width: 700px;
-            margin: 0 auto;
-            font-size: 1.1rem;
-        }
-
-        /* Requisitos del Servicio */
         .requisitos {
-            background-color: #1e293b;
-            padding: 20px;
-            margin: 20px auto;
-            border-radius: 10px;
-            max-width: 800px;
-            border-left: 5px solid var(--naranja);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            border: 1px solid var(--naranja);
+            margin: 20px 0;
         }
 
-        .requisitos h2 {
-            color: var(--naranja);
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        /* Carriles de Imágenes */
+        /* Estilos de los Carriles */
         .seccion-carril {
-            padding: 40px 20px;
+            padding: 40px 5%;
+            animation: fadeInUp 1.2s ease-out;
         }
 
         .seccion-carril h2 {
-            margin-left: 5%;
-            margin-bottom: 20px;
             color: var(--turquesa);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .carril {
             display: flex;
-            overflow-x: auto; /* Permite scroll horizontal en móviles */
-            gap: 15px;
-            padding: 10px 5%;
-            scrollbar-width: thin;
-            scrollbar-color: var(--turquesa) var(--oscuro);
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scrollbar-width: none; /* Ocultar scroll en Firefox */
         }
 
-        .carril::-webkit-scrollbar {
-            height: 8px;
-        }
+        .carril::-webkit-scrollbar { display: none; } /* Ocultar scroll en Chrome */
 
-        .carril::-webkit-scrollbar-thumb {
-            background: var(--turquesa);
-            border-radius: 10px;
-        }
-
-        .tarjeta-img {
-            flex: 0 0 275px; /* Tamaño exacto solicitado */
+        /* Marco de la Imagen */
+        .contenedor-img {
+            position: relative;
+            flex: 0 0 275px;
             height: 178px;
-            border: 2px solid transparent;
-            border-radius: 8px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid rgba(0, 206, 209, 0.3);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .contenedor-img img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
-        .tarjeta-img:hover {
-            transform: scale(1.05);
-            border-color: var(--naranja);
+        /* Nombre sobre la imagen */
+        .nombre-categoria {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
         }
 
-        /* Botón de Acción (WhatsApp) */
+        /* Hover Efectos */
+        .contenedor-img:hover {
+            transform: scale(1.1) translateY(-10px);
+            border-color: var(--naranja);
+            animation: pulseGlow 1.5s infinite;
+            z-index: 10;
+        }
+
+        /* Botón WhatsApp Flotante/Animado */
         .cta-container {
+            padding: 50px;
             text-align: center;
-            padding: 60px 20px;
         }
 
         .btn-whatsapp {
-            background-color: var(--naranja);
-            color: var(--oscuro);
-            padding: 18px 35px;
+            display: inline-block;
+            background: var(--naranja);
+            color: white;
+            padding: 20px 40px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.2rem;
-            border-radius: 50px;
-            transition: background 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+            font-size: 1.3rem;
+            transition: 0.3s;
+            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.4);
+            animation: pulseGlow 2s infinite;
         }
 
         .btn-whatsapp:hover {
-            background-color: #e67e00;
-            color: white;
+            transform: translateY(-5px);
+            background: #ff7b00;
         }
 
         footer {
+            padding: 40px;
             text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            color: #94a3b8;
-            border-top: 1px solid #334155;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.8rem; }
-            .tarjeta-img { flex: 0 0 200px; height: 130px; }
+            opacity: 0.6;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -169,50 +180,84 @@
     </header>
 
     <section class="hero">
-        <h1>Kleiin MW</h1>
-        <p>Transformamos tu televisor en un centro de entretenimiento total. Servicio exclusivo para <strong>Corrientes Capital</strong>.</p>
-        
+        <h1>KLEIIN MW</h1>
+        <p>Servicio exclusivo en <strong>Corrientes Capital</strong></p>
         <div class="requisitos">
-            <h2>Requisitos para la instalación:</h2>
-            <p>Compatible con Smart TV, Android TV, TV Box y dispositivos similares.</p>
+            ⚡ Disponible para: Smart TV, Android TV, TV Box y más.
         </div>
     </section>
 
     <section class="seccion-carril">
-        <h2>Deportes en Vivo</h2>
+        <h2><span>⚽</span> DEPORTES</h2>
         <div class="carril">
-            <img src="deportes/futbol.png" alt="Fútbol" class="tarjeta-img">
-            <img src="deportes/carreras.png" alt="Carreras" class="tarjeta-img">
-            <img src="deportes/basquet.png" alt="Básquet" class="tarjeta-img">
-            <img src="deportes/tenis.png" alt="Tenis" class="tarjeta-img">
-            <img src="deportes/boxeo.png" alt="Boxeo" class="tarjeta-img">
-            <img src="deportes/mas-deportes.png" alt="Más Deportes" class="tarjeta-img">
+            <div class="contenedor-img">
+                <img src="deportes/futbol.png" alt="Fútbol">
+                <div class="nombre-categoria">Fútbol En Vivo</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="deportes/carreras.png" alt="Carreras">
+                <div class="nombre-categoria">Automovilismo</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="deportes/basquet.png" alt="Básquet">
+                <div class="nombre-categoria">Básquet</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="deportes/tenis.png" alt="Tenis">
+                <div class="nombre-categoria">Tenis</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="deportes/boxeo.png" alt="Boxeo">
+                <div class="nombre-categoria">Boxeo / MMA</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="deportes/mas-deportes.png" alt="Más">
+                <div class="nombre-categoria">Mucho Más</div>
+            </div>
         </div>
     </section>
 
     <section class="seccion-carril">
-        <h2>Series y Películas</h2>
+        <h2><span>🎬</span> PELÍCULAS Y SERIES</h2>
         <div class="carril">
-            <img src="peliculas/accion.png" alt="Acción" class="tarjeta-img">
-            <img src="peliculas/drama.png" alt="Drama" class="tarjeta-img">
-            <img src="peliculas/estrenos.png" alt="Estrenos" class="tarjeta-img">
-            <img src="peliculas/comedia.png" alt="Comedia" class="tarjeta-img">
-            <img src="peliculas/scifc.png" alt="Ciencia Ficción" class="tarjeta-img">
-            <img src="peliculas/thriller.png" alt="Thriller" class="tarjeta-img">
+            <div class="contenedor-img">
+                <img src="peliculas/accion.png" alt="Acción">
+                <div class="nombre-categoria">Acción</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="peliculas/drama.png" alt="Drama">
+                <div class="nombre-categoria">Drama</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="peliculas/estrenos.png" alt="Estrenos">
+                <div class="nombre-categoria">Estrenos 2026</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="peliculas/comedia.png" alt="Comedia">
+                <div class="nombre-categoria">Comedia</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="peliculas/scifc.png" alt="Sci-Fi">
+                <div class="nombre-categoria">Ciencia Ficción</div>
+            </div>
+            <div class="contenedor-img">
+                <img src="peliculas/thriller.png" alt="Thriller">
+                <div class="nombre-categoria">Thriller</div>
+            </div>
         </div>
     </section>
 
     <section class="cta-container">
-        <a href="https://wa.me/543794082942?text=Hola,%20Kleiin%20MW!%20Quiero%20contratar%20el%20servicio%20y%20empezar%20a%20negociar." class="btn-whatsapp" target="_blank">
-            ¡Contratar Servicio Ahora!
+        <a href="https://wa.me/543794082942?text=Hola%20Kleiin%20MW,%20quiero%20contratar%20el%20servicio%20en%20Corrientes%20Capital" class="btn-whatsapp">
+            SOLICITAR INSTALACIÓN
         </a>
-        <p style="margin-top: 15px; font-size: 0.8rem; color: var(--turquesa);">Atención personalizada vía WhatsApp</p>
     </section>
 
     <footer>
-        <p>&copy; 2026 Kleiin MW - Corrientes Capital, Argentina.</p>
+        <p>Kleiin MW &copy; 2026 | Corrientes Capital, Argentina</p>
     </footer>
 
 </body>
 </html>
+
 
